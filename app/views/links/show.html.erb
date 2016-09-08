@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Original:</strong>
+  <%= @link.original %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @link.slug %>
+</p>
+
+<p>
+  <strong>Visits:</strong>
+  <%= @link.visits %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @link.active %>
+</p>
+
+<%= link_to 'Edit', edit_link_path(@link) %> |
+<%= link_to 'Back', links_path %>

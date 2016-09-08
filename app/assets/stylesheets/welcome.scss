@@ -1,15 +1,22 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "colors"; 
-
-.jumbotron {
-    background-color: $brown !important;
+.jumbotron{
+    background-color: $tan;
     color: $navy !important;
 
-    .btn {
+    .btn{
       background-color: $purple;
-      color: white;
     }
+}
+
+.numbered-list{
+  counter-reset: list_counter;
+}
+
+.numbered-list__counter:before{
+    counter-increment: list_counter;
+    content: counter(list_counter);
+}
+
+.numbered-list__item .ul{
+  list-style-type: decimal;
 }
