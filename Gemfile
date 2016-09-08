@@ -17,15 +17,6 @@ gem 'twitter'
 gem 'json'
 #gem 'airbrake'
 gem 'koala'
-gem 'linkedin'
-gem 'omniauth'
-gem 'omniauth-oauth2'
-gem 'omniauth-facebook'
-gem 'omniauth-github'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-linkedin-oauth2'
-gem 'omniauth-twitter'
-gem 'rmagick'
 gem 'simple_form'
 # gem 'pg'
 gem 'thin'
@@ -40,11 +31,12 @@ group :development, :test do
   #gem "pry"
   gem 'factory_girl_rails' # https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md
   gem 'faker' # http://rubydoc.info/github/stympy/faker/master/frames
-
+  gem "rspec-rails"
+  gem 'meta_request'
 end
 
 group :test do
-  gem "rspec", "3.5.0"
+  # gem "rspec", "3.5.0"
   gem 'database_cleaner' # https://github.com/bmabey/database_cleaner
 end
 

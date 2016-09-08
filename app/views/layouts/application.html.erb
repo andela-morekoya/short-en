@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Railstut2</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Short.en</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag    "application", "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+ <%= render "layouts/nav" %>
 
-<%= yield %>
+  <!-- <div class="alert alert-success" data-dismiss="alert"><%= notice %></div>
+  <div class="alert alert-warning" data-dismiss="alert"><%= alert %></div>
+ -->
+  <%= yield %>
 
 </body>
 </html>

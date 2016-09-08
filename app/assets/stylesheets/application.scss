@@ -13,3 +13,27 @@
  *= require_tree .
  *= require_self
  */
+
+@import "colors"; 
+
+ body {
+  color: $navy;
+ }
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+.navbar .btn {
+  margin-top: 15px;
+}
+
+.btn a {
+  color: white;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}
