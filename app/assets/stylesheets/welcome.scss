@@ -8,15 +8,6 @@
     }
 }
 
-.numbered-list{
-  counter-reset: list_counter;
-}
-
-.numbered-list__counter:before{
-    counter-increment: list_counter;
-    content: counter(list_counter);
-}
-
-.numbered-list__item .ul{
-  list-style-type: decimal;
+.top-list{
+  list-style-type: none;
 }

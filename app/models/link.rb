@@ -1,14 +1,16 @@
 class Link < ActiveRecord::Base
-  validates :original, :slug, :presence => true
-  validates :slug, :uniqueness => true
-
   belongs_to :user
-  after_create :convert_original_url
+  before_create :convert_original_url
+  validates :original, presence: true,
+                       format: { with: %r{\A^http|https:\/\/},
+                             notice: 'Your URL should include http/https' }
+  validates :slug, uniqueness: true
+
 
 
   def convert_original_url
-    self.slug = self.id.to_s(36)
-    self.save
+    alphabet = ("a".."z").to_a + (0..9).to_a
+    self.slug = (0...6).map{ alphabet.to_a[rand(alphabet.size)] }.join
   end
 
   def shortened_url

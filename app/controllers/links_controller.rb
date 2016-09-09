@@ -1,13 +1,13 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_link, only: [:edit, :update, :destroy]
 
   # GET /links
   # GET /links.json
   def index
     @links = Link.all
-    @link = Link.new
-    @popular_links = Link.order(clicks: :desc).first(10)
-    @recent_links = Link.order(created_at: :desc).first(10)
+    # @link = Link.new
+    # @popular_links = Link.order(visits: :desc).first(10)
+    # @recent_links = Link.order(created_at: :desc).first(10)
   end
 
   # GET /links/1
@@ -76,8 +76,8 @@ class LinksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_link
-      @link = Link.find_by(:slug params[:slug])
-      # @link = Link.find(params[:id])
+      # @link = Link.find_by(:slug params[:slug])
+      @link = Link.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

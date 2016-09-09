@@ -1,4 +1,29 @@
-<%= simple_form_for(@link) do |f| %>
+<%= form_for @link do |f| %>
+  <div class="result"></div>
+  <div class="input-group">
+    <%= f.text_field :original, :class => "form-control", 
+        :placeholder => "Paste your link, shorten it and share" %>
+    <span class="input-group-btn">
+      <%= f.submit 'Shorten', :class => "btn"%>
+    </span>
+  </div>
+  <% if @link.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@link.errors.count, "error") %> 
+        prohibited this link from being created:
+      </h2>
+      <ul>
+      <% @link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+
+<!-- <%= simple_form_for(@link) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -11,4 +36,4 @@
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
-<% end %>
+<% end %> -->

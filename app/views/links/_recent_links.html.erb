@@ -1,0 +1,9 @@
+<h3 class="list-header">Recent Links</h3>
+  <ul class="top-list">
+    <% @recent_links.each.with_index(1) do |link, index| %>
+      <li>
+        <span><%= index %>.&nbsp;</span>
+        <%= link_to link.shortened_url, link.original, target: '_blank' %>
+      </li>
+    <% end %>
+  </ul>
