@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:edit, :update, :destroy]
+  before_action :authenticate_user, only: [:index, :update, :destroy]
 
   # GET /links
   # GET /links.json
@@ -15,7 +16,7 @@ class LinksController < ApplicationController
   def show
     if params[:slug]
       @link = Link.find_by(slug: params[:slug])
-      if redirect_to @link.original
+      if redirect_to @link.original, status: 301
         @link.visits += 1
         @link.save
       end
@@ -37,14 +38,19 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
-
+    @link.user_id = current_user ? current_user.id : 0
     respond_to do |format|
       if @link.save
-        format.html { redirect_to @link, notice: 'Link was successfully created.' }
-        format.json { render :show, status: :created, location: @link }
+        byebug
+        # format.html { redirect_to @link, notice: 'Link was successfully created.' }
+        # format.js { render :show, status: :created, location: @link }
+        format.html { redirect_to root_path, notice: 'Link was successfully created.' }
+        format.js #{ render :index, status: :created, location: @link }
+        format.json { render action: 'show', status: :created, location: @link }
       else
-        format.html { render :new }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
+        format.html { redirect_to :new }
+        # format.js { render json: @link.errors, status: :unprocessable_entity }
+        format.js { render json: @link.errors, status: :unprocessable_entity }
       end
     end
   end

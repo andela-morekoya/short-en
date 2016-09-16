@@ -1,32 +1,48 @@
 
-<nav class="navbar">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button> -->
+      </button>
       <%= link_to root_path do %>
-        <p class="navbar-brand logo">Short.en</p>
+        <h4 class="navbar-brand logo btn">Short.en</h4>
       <% end %>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
+      <% if user_signed_in? %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          Welcome <%= current_user.username %><span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <%= link_to "Edit Profile", edit_user_registration_path  %>
+            </li>
+            <li>
+              <%= link_to "My Account", dashboard_path  %>
+            </li>
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete do %>
+                Log Out
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% else %>
       <li>
-        <% if user_signed_in? %>
-          <button class="btn btn-primary">
-            <span class="glyphicon glyphicon-log-out"></span>
-            <%= link_to destroy_user_session_path, method: :delete do %>Log Out<% end %>
-          </button>
-        <% else %>
-          <button class="btn btn-primary">
-            <%= link_to new_user_registration_path do %>Sign Up<% end %>
-          </button>
-          <button class="btn btn-primary">
-            <%= link_to new_user_session_path do %>Login<% end %>
-          </button>
+        <%= link_to new_user_registration_path do %>
+          <button class="btn btn-primary">Sign up</button>
         <% end %>
+      </li>
+      <li>
+        <%= link_to new_user_session_path do %>
+          <button class="btn btn-default">Login</button>
+        <% end %>
+      </li>
+      <% end %>
       </ul>
     </div>
   </div>

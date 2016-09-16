@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
-//= require_tree .
+//= require_tree
+
+$(document).on('page:change', function(){
+$(".alert").delay(2000).slideUp(500, function(){
+      $(".alert").alert('close');
+  });
+});
+
+

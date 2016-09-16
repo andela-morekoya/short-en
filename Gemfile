@@ -16,13 +16,13 @@ gem 'puma', '~> 3.6'
 gem 'carrierwave', '~> 0.11.2'
 gem 'json'
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
+gem 'coveralls', '~> 0.8.15'
 # gem 'shortener', '~> 0.5.5'
 # gem 'fixed_length_encoder', '~> 2.0'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3', '>= 1.3.11'
   gem 'byebug', '~> 9.0', '>= 9.0.5'
-  gem 'web-console', '~> 3.3'
   gem 'spring', '~> 1.7', '>= 1.7.2'
   gem 'capybara', '~> 2.8', '>= 2.8.1'
   #gem "pry"
@@ -30,6 +30,10 @@ group :development, :test do
   gem 'faker', '~> 1.6', '>= 1.6.6' # http://rubydoc.info/github/stympy/faker/master/frames
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'meta_request', '~> 0.4.0'
+end
+
+group :development do
+  gem 'web-console', '~> 3.3'
 end
 
 group :test do

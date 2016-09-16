@@ -1,17 +1,16 @@
-<%= form_for @link do |f| %>
-  <div class="result"></div>
+<%= form_for @link, remote: true do |f| %>
   <div class="input-group">
-    <%= f.text_field :original, :class => "form-control", 
+    <%= f.text_field :original, :class => "form-control input-lg url",
         :placeholder => "Paste your link, shorten it and share" %>
     <span class="input-group-btn">
-      <%= f.submit 'Shorten', :class => "btn"%>
+      <%= f.submit 'Shorten', :class => "btn btn-lg"%>
     </span>
   </div>
   <% if @link.errors.any? %>
     <div id="error_explanation">
       <h2>
         <%= pluralize(@link.errors.count, "error") %> 
-        prohibited this link from being created:
+        stopped this link from being created:
       </h2>
       <ul>
       <% @link.errors.full_messages.each do |msg| %>
@@ -21,19 +20,4 @@
     </div>
   <% end %>
 <% end %>
-
-
-<!-- <%= simple_form_for(@link) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :original %>
-    <%= f.input :slug %>
-    <%= f.input :visits %>
-    <%= f.input :active %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %> -->
+<div class="result"></div>

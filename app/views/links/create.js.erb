@@ -1,3 +1,10 @@
-$('.result').append('<p class="short_url">Your Shortened Link: ' + 
-  '<%= link_to @link.display_slug, @link.display_slug, target: "_blank" %>' + 
-  '</p>')
+$('.url').empty()
+
+
+$('.result').html('<br><p>Your Shortened Link: ' 
+  + '<span id="short_url"><%= link_to @link.shortened_url, @link.shortened_url %>&nbsp;</span>'
+  + '<button class="btn btn-default btn-copy" '
+  + 'data-clipboard-text="<%= @link.shortened_url %>" '
+  + 'data-clipboard-action="copy" data-clipboard-target="#short_url">' 
+  + 'Copy Shortened URL</button></p><br>')
+

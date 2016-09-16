@@ -1,9 +1,15 @@
-<h3 class="list-header">Recent Links</h3>
-  <ul class="top-list">
+<div class="panel panel-primary panel-inverse">
+  <div class="panel-heading">
+    <h4>Recent Links</h4>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
     <% @recent_links.each.with_index(1) do |link, index| %>
-      <li>
-        <span><%= index %>.&nbsp;</span>
+      <li class="list-group-item">
+        <span class="badge"><%= index %></span>
         <%= link_to link.shortened_url, link.original, target: '_blank' %>
       </li>
     <% end %>
-  </ul>
+    </ul>
+  </div>
+</div>

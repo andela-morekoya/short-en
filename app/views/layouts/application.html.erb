@@ -3,19 +3,24 @@
 <head>
   <title>Short.en | URL Shortener</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <%= render "layouts/nav" %>
+  
+  <%= render "layouts/nav" %>
+  
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= value %>
+    </div> 
+  <% end %>
 
-  <!-- <div class="alert alert-success" data-dismiss="alert"><%= notice %></div>
-  <div class="alert alert-warning" data-dismiss="alert"><%= alert %></div>
- -->
-    <%= yield %>
-  </div>
+  <%= yield %>
 
 </body>
 </html>
