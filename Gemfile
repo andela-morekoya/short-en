@@ -16,7 +16,7 @@ gem 'puma', '~> 3.6'
 gem 'carrierwave', '~> 0.11.2'
 gem 'json'
 gem 'simple_form', '~> 3.3', '>= 3.3.1'
-gem 'coveralls', '~> 0.8.15'
+gem 'coveralls', require: false
 # gem 'shortener', '~> 0.5.5'
 # gem 'fixed_length_encoder', '~> 2.0'
 
