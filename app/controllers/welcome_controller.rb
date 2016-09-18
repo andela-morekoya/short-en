@@ -10,8 +10,9 @@ class WelcomeController < ApplicationController
     link_visits = Link.select(:user_id, :visits).where('user_id > 0')
     influential_links = link_visits.group(:user_id).sum(:visits).to_a.reverse
     influential_users = []
-    influntial_links.each |item| do
+    influential_links.each do |item|
       influential_users.push(User.find(item[0]).username)
     end
-   influential_users
+    influential_users
+  end
 end

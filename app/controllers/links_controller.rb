@@ -8,10 +8,7 @@ class LinksController < ApplicationController
     if params[:slug]
       @link = Link.find_by(slug: params[:slug])
       if @link && @link.active
-        if redirect_to @link.original, status: 301
-          @link.visits += 1
-          @link.save
-        end
+        @link.increment! if redirect_to @link.original, status: 301
       else
         render "layouts/not_found"
       end

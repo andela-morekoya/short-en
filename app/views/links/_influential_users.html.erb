@@ -1,13 +1,12 @@
 <div class="panel panel-primary panel-inverse">
   <div class="panel-heading">
-    <h4>Popular Links</h4>
+    <h4>Influential Users</h4>
   </div>
   <div class="panel-body">
     <ul class="list-group">
-    <% @popular_links.each do |link| %>
+    <% @influential_users.each do |name, index| %>
     <li class="presentation list-group-item">
-      <span class="badge badge-warning"><%= link.visits %> Visits</span>
-      <%= link_to link.shortened_url, link.original, target: '_blank' %>
+      <%= name %>
     </li>
     <% end %>
     </ul>
