@@ -1,36 +1,31 @@
 <div class="container-fluid">
   <h3>My Links</h3>
-  <% if @links.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Original URL</th>
-        <th>Shortened URL</th>
-        <th>Visits</th>
-        <th>Active</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @links.each do |link| %>
-        <tr>
-          <td><%= link.original %></td>
-          <td><%= link_to link.shortened_url, link.slug, target: "_blank" %></td>
-          <td><%= link.visits %></td>
-          <td><%= link.active %></td>
-          <td><%= link_to 'Show', user_link_path %></td>
-          <td><%= link_to 'Edit', edit_user_link_path %></td>
-          <td><%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="list-group">
+    <ul>
+    <% if @links.any? %>
+    <% @links.each do |link| %>
+      <li class="list-group-item">
+        <%= form_for link do |f| %>
+        <div class="form-group">
+          <h5><%= link_to "link.get_title", link.shortened_url, target: "_blank" %> </h5>
+          Original URL : 
+          <%= f.url_field :original, required: true, class: "form-control" %>
+          <br>
+          Set Vanity String: 
+          <%= f.text_field :slug, required: true, class: "form-control" %><br>
+          <div class="row"><div class="col-lg-2">Link Visits:
+          <%= f.label link.visits %></div>
+          <div class="col-lg-2">Link Active? <%= f.check_box :active %></div>
+          </div>
+          <%= f.submit "Update Link", class: "btn btn-primary" %>
+          <% end %>
+          <%= link_to 'Delete', link, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+  </div>
   <% else %>
     <p> You have not created any shortened links </p>
   <% end %>
-
-  <br>
-
-  <%= link_to 'Shorten a Link', new_link_path %>
 </div>

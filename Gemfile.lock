@@ -252,6 +252,7 @@ DEPENDENCIES
   jquery-rails (~> 4.2, >= 4.2.1)
   json
   meta_request (~> 0.4.0)
+  nokogiri
   pg (~> 0.18.4)
   puma (~> 3.6)
   rails (~> 4.2.6)

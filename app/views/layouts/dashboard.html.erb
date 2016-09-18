@@ -9,11 +9,7 @@
 </head>
 <body>
   
-  <% if signed_in? %>
-    <%= render "layouts/admin_nav" %>
-  <% else %>
-    <%= render "layouts/nav" %>
-  <% end %>
+  <%= render "layouts/admin_nav" %>
   
   <% flash.each do |key, value| %>
     <div class="alert alert-<%= key %>" role="alert">
@@ -24,7 +20,17 @@
     </div> 
   <% end %>
 
-  <%= yield %>
+  <div class="container">
+    <div class="panel panel-inverse">
+      <div class="panel-body">
+        <br>
+        <%= render "links/form" %>
+        <br>
+      </div>
+    </div>
 
+    <%= yield %>
+
+  </div>
 </body>
 </html>
