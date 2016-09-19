@@ -6,18 +6,6 @@
       <%= f.submit 'Shorten', :class => "btn btn-lg"%>
     </span>
   </div>
-  <% if @link.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@link.errors.count, "error") %> 
-        stopped this link from being created:
-      </h2>
-      <ul>
-      <% @link.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div id="error-explanation"></div>
 <% end %>
-<div class="result"></div>
+<div class="result center"></div>

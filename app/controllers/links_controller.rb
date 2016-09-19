@@ -8,7 +8,8 @@ class LinksController < ApplicationController
     if params[:slug]
       @link = Link.find_by(slug: params[:slug])
       if @link && @link.active
-        @link.increment! if redirect_to @link.original, status: 301
+        @link.visits += 1 if redirect_to @link.original, status: 301
+        @link.save
       else
         render "layouts/not_found"
       end
@@ -28,14 +29,15 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(new_link_params)
     @link.user_id = current_user ? current_user.id : 0
+
     respond_to do |format|
       if @link.save
         format.html { redirect_to root_path, notice: 'Link was successfully created.' }
         format.js 
       else
-        format.html { redirect_to :new }
-        # format.js { render json: @link.errors, status: :unprocessable_entity }
-        format.js { render json: @link.errors, status: :unprocessable_entity }
+        format.html { render :form, notice: "Please paste the full URL (with http)" }
+        format.js
+        # format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -45,7 +47,8 @@ class LinksController < ApplicationController
       if @link.update(link_params)
         format.html { redirect_to :dashboard, notice: 'Link updated successfully.' }
       else
-        format.html { render :index }
+        format.html { redirect_to :dashboard, notice: 'Error occured' }
+        format.js
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
@@ -76,6 +79,6 @@ class LinksController < ApplicationController
     end
 
     def link_params
-      params.require(:link).permit(:all)
+      params.require(:link).permit(:original, :slug, :active)
     end
 end

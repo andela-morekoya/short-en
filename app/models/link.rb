@@ -2,7 +2,6 @@ class Link < ActiveRecord::Base
   belongs_to :user
   has_many :visit
   before_create :convert_original_url
-  after_update :edit
   validates :user_id, :original, presence: true
   validates :original, format: { with: %r{\A^http|https:\/\/},
                              notice: 'Your URL should include http/https' }

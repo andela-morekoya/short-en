@@ -2,21 +2,31 @@
 @import "bootstrap";
 @import "colors"; 
 
- body{
+body{
   color: $navy;
- }
+}
 
 .navbar{
   margin-bottom: 0;
   border-radius: 0;
-}
-
-.navbar .btn{
-  margin-top: 15px;
-}
-
-.btn a{
   color: white;
+}
+
+.logo {
+  font-family: 'Permanent Marker', serif;
+  font-size: 40px;
+  color: white;
+  margin-top: 10px;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+  color: white;
+  margin-top: 10px;
+}
+
+.jumbotron .btn a{
+  color: white;
+  text-decoration: none;
 }
 
 .alert-notice{
@@ -29,6 +39,15 @@
     background-color: #f2dede;
     border-color: #ebccd1;
     color: #a94442;
+}
+
+.badge{
+  color: $black;
+  background-color: $yellow;
+}
+
+.list-group-item{
+  border: none;
 }
 
 footer{
