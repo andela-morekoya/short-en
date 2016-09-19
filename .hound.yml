@@ -1,0 +1,11 @@
+scss:
+ enabled: false
+
+ruby:
+ config_file: .rubocop.yml
+
+javascript:
+ ignore_file: .javascript_ignore
+ config_file: .jshintrc
+
+fail_on_violations: true
