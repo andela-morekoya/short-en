@@ -12,8 +12,9 @@ class Link < ActiveRecord::Base
   end
 
   def get_title
-    page = URI.parse(self.original).read
-    page.match(/<title>(.*)<\/title>/)[1]
+    # page = URI.parse(self.original).read
+    # page.match(/<title>(.*)<\/title>/)[1]
+    open('http://google.com/').read.match(/<title>(.*?)<\/title>/)[1]
   end
 
   def self.popular

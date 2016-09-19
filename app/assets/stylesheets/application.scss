@@ -3,7 +3,7 @@
 @import "colors"; 
 
 body{
-  color: $navy;
+  color: $black;
 }
 
 .navbar{
@@ -12,11 +12,19 @@ body{
   color: white;
 }
 
-.logo {
+.logo{
   font-family: 'Permanent Marker', serif;
   font-size: 40px;
   color: white;
   margin-top: 10px;
+}
+
+.navbar{
+  background-color: $black;
+}
+
+.navbar-header a:hover, a:focus{
+  text-decoration: none;
 }
 
 .navbar-inverse .navbar-nav > li > a{
@@ -24,9 +32,18 @@ body{
   margin-top: 10px;
 }
 
+.jumbotron{
+  background-color: $yellow;
+}
+
 .jumbotron .btn a{
   color: white;
   text-decoration: none;
+}
+
+.input-group-btn .btn{
+  background-color: $black;
+  color: $yellow;
 }
 
 .alert-notice{
@@ -50,8 +67,25 @@ body{
   border: none;
 }
 
+.top-list{
+  border: 5px solid;
+  border-radius: 10px;
+}
+
+.panel-heading{
+  color: white;
+  background-color: $black;
+}
+
 footer{
-  background-color: $purple;
+  margin-top: 100px;
+  background-color: $black;
   color: white;
   padding: 25px;
+}
+
+footer .glyphicon{
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: $yellow;
 }

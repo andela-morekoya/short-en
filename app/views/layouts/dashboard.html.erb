@@ -3,7 +3,7 @@
 <head>
   <title>Short.en | URL Shortener</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css?family=Permanent+Marker&effect=ice", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -21,7 +21,7 @@
   <% end %>
 
   <div class="container">
-    <div class="panel panel-inverse">
+    <div class="panel">
       <div class="panel-body">
         <br>
         <%= render "links/form" %>
@@ -32,5 +32,6 @@
     <%= yield %>
 
   </div>
+  <%= render "layouts/footer" %>
 </body>
 </html>

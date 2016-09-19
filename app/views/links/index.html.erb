@@ -8,7 +8,7 @@
           <div class="panel-heading" role="tab" id="heading<%= link.id %>">
             <h4 class="panel-title">
             <div class="row">
-            <%= link_to 'link.get_title', link.shortened_url, target: "_blank", class: "col-md-8" %>
+            <%= link_to link.get_title, link.shortened_url, target: "_blank", class: "col-md-8" %>
             <a class= "collapsed col-md-2 "role="button" data-toggle="collapse" 
             data-parent="#accordion" href="#collapse<%= link.id %>" aria-expanded="true" 
             aria-controls="collapse<%= link.id %>">
