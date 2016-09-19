@@ -21,3 +21,4 @@
 
 # Ignore environment variables
 /config/env_vars.rb
+/config/boot.rb
