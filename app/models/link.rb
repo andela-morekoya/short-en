@@ -12,9 +12,7 @@ class Link < ActiveRecord::Base
   end
 
   def get_title
-    # page = URI.parse(self.original).read
-    # page.match(/<title>(.*)<\/title>/)[1]
-    open('http://google.com/').read.match(/<title>(.*?)<\/title>/)[1]
+    Nokogiri::HTML::Document.parse(open(self.original)).title.squish
   end
 
   def self.popular
@@ -29,7 +27,6 @@ class Link < ActiveRecord::Base
 
   def convert_original_url
     alphabet = ("a".."z").to_a + (0..9).to_a
-    # self.slug = (0...6).map{ alphabet.to_a[rand(alphabet.size)] }.join
     self.slug = (0...6).map{ alphabet.sample }.join
   end
 end

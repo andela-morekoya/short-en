@@ -13,6 +13,6 @@ before_action :configure_account_update_params, only: [:update]
   end
 
   def after_update_path_for(resource)
-      dashboard_path
-    end
+    dashboard_path
+  end
 end
