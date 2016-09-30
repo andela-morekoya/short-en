@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <title>Short.en | URL Shortener</title>
@@ -7,20 +7,27 @@
   <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body id="top"> 
-  <%= select_nav %>
-  
-  <% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <%= value %>
-    </div> 
-  <% end %>
+<body>
+  <div id="wrapper">
+    <div id="header">
+      <%= select_nav %>
+    </div>  
 
-  <%= yield %>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= value %>
+      </div> 
+    <% end %>
 
-  <%= render "layouts/footer" %>
+    <div id="content">
+      <%= yield %>
+    </div>
+
+    <div id="footer">
+      <%= render "layouts/footer" %>
+    </div>
 </body>
 </html>

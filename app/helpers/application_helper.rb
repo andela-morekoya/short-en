@@ -1,6 +1,6 @@
 module ApplicationHelper
   def select_nav
-    if signed_in?
+    if current_user
      render "layouts/admin_nav" 
     else 
        render "layouts/nav" 

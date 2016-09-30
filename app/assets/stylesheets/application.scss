@@ -4,6 +4,23 @@
 
 body{
   color: $black;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#wrapper{
+  min-height: 100%;
+  position: relative;
+}
+
+#header{
+  padding: 0;
+}
+
+#content{
+  padding: 0;
+  padding-bottom: 5em;   
 }
 
 .navbar{
@@ -30,10 +47,20 @@ body{
 .navbar-inverse .navbar-nav > li > a{
   color: white;
   margin-top: 10px;
+  padding-bottom: 20px;
+}
+
+.sign-up{
+  background-color: $yellow;
+  color: $navy;
+}
+
+a.sign-up{
+  color: $navy;
 }
 
 .jumbotron{
-  background-color: $yellow;
+  background-color: $grey;
 }
 
 .jumbotron .btn a{
@@ -75,6 +102,13 @@ body{
 .panel-heading{
   color: white;
   background-color: $black;
+}
+
+#footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 5em;   
 }
 
 footer{

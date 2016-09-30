@@ -1,10 +1,13 @@
 class Link < ActiveRecord::Base
   belongs_to :user
-  has_many :visit
-  before_create :convert_original_url
+  has_many :visits
+  before_create :convert_original_url, :set_title
+  before_update :set_title
   validates :user_id, :original, presence: true
-  validates :original, format: { with: %r{\A^http|https:\/\/},
-                             notice: 'Your URL should include http/https' }
+  validates :original, format: { 
+                                  with: URI.regexp,
+                                  notice: 'Your URL should include http/https' 
+                                }
   validates :slug, uniqueness: true
 
   def shortened_url
@@ -12,7 +15,8 @@ class Link < ActiveRecord::Base
   end
 
   def get_title
-    Nokogiri::HTML::Document.parse(open(self.original)).title.squish
+    page = Net::HTTP.get(URI(self.original))
+    Nokogiri::HTML::Document.parse(page).title.squish
   end
 
   def self.popular
@@ -28,5 +32,10 @@ class Link < ActiveRecord::Base
   def convert_original_url
     alphabet = ("a".."z").to_a + (0..9).to_a
     self.slug = (0...6).map{ alphabet.sample }.join
+  end
+
+  def set_title
+    self.title ||= self.get_title
+    self.title = self.original if self.title.nil?
   end
 end

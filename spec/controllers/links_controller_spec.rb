@@ -1,26 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe LinksController, type: :controller do
+  include RSpec::Rails::RequestExampleGroup
 
-  # This should return the minimal set of attributes required to create a valid
-  # Link. As you add validations to Link, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) { 
-    {:original => "http://something.com", :user_id => 2}
+    {original: Faker::Internet.url, :user_id => 2}
   }
 
   let(:invalid_attributes) {
     {:original => "something.com", :user_id => 2}
-    {:original => "http://something.com", :user_id => nil}
+    {:original => Faker::Internet.url, :user_id => nil}
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # LinksController. Be sure to keep this updated too.
-  # let(:valid_session) { {} }
-
   describe "GET #show" do
-    include RSpec::Rails::RequestExampleGroup
     it "redirects slug to original url" do
       link = Link.create! valid_attributes
       get link.shortened_url
@@ -47,11 +39,6 @@ RSpec.describe LinksController, type: :controller do
         post :create, params: {link: valid_attributes}
         expect(assigns(:link)).to be_a(Link)
         expect(assigns(:link)).to be_persisted
-      end
-
-      it "redirects to the created link" do
-        post :create, params: {link: valid_attributes}
-        expect(response).to redirect_to(Link.last)
       end
     end
 

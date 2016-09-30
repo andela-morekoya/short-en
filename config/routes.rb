@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { 
-    registrations: 'users/registrations',
-    sessions: "users/sessions" }
+  # devise_for :users, controllers: { 
+  #   registrations: 'users/registrations',
+  #   sessions: "users/sessions" }
 
   root 'welcome#index'
 
   get "/dashboard" => "links#manage"
-
-  resources :users 
+  resources :session, only: [:new, :create, :destroy]
+  resources :users
 
   resources :links
   

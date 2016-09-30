@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:manage, :index, :update, :destroy,
+  before_action :authenticate, only: [:manage, :index, :update, :destroy,
     notice: "You must be logged in to view this page"]
   layout "dashboard", only: :manage
 
@@ -73,7 +73,6 @@ class LinksController < ApplicationController
       @link = Link.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def new_link_params
       params.require(:link).permit(:original)
     end

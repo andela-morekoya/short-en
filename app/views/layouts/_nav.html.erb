@@ -14,14 +14,10 @@
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to new_user_registration_path do %>
-            <button class="btn btn-primary">Sign up</button>
-          <% end %>
+          <%= link_to "Login", new_session_path %>
         </li>
-        <li>
-          <%= link_to new_user_session_path do %>
-            <button class="btn btn-default">Login</button>
-          <% end %>
+        <li class="sign-up">
+          <%= link_to "Create an Account", new_user_path, class: "sign-up" %>
         </li>
       </ul>
     </div>
