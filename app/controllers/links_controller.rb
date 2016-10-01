@@ -1,7 +1,12 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:edit, :update, :destroy]
-  before_action :authenticate, only: [:manage, :index, :update, :destroy,
-    notice: "You must be logged in to view this page"]
+  before_action :authenticate, 
+                except: [ 
+                          :show, 
+                          :new, 
+                          :create, 
+                          notice: "You must be logged in to view this page"
+                        ]
   layout "dashboard", only: :manage
 
   def show
@@ -19,6 +24,7 @@ class LinksController < ApplicationController
   end
 
   def new
+    current_user
     @link = Link.new
   end
 
@@ -74,7 +80,7 @@ class LinksController < ApplicationController
     end
 
     def new_link_params
-      params.require(:link).permit(:original)
+      params.require(:link).permit(:original, :slug)
     end
 
     def link_params

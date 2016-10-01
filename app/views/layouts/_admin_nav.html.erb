@@ -6,29 +6,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to root_path do %>
-        <h4 class="logo">Short-en</h4>
-      <% end %>
+      <%= link_to "Short-en", root_path, class: "logo" %>
     </div>
     <div class="collapse navbar-collapse" id="main-navbar">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          Welcome <%= current_user.username.capitalize %>
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <%= link_to "Edit Profile", edit_user_path  %>
-            </li>
-            <li>
-              <%= link_to "My Account", dashboard_path  %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                Log Out
-              <% end %>
-            </li>
-          </ul>
+          <%= link_to "Welcome #{current_user.username.capitalize}", dashboard_path  %>
+        </li>
+        <li>
+          <%= link_to "Log Out", logout_path %>
         </li>
       </ul>
     </div>

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_user
-      redirect_to new_session_path, alert: "You need to log in or sign up"
+      redirect_to login_path, alert: "You need to log in or sign up"
     end
   end  
 end

@@ -4,10 +4,13 @@ Rails.application.routes.draw do
   #   sessions: "users/sessions" }
 
   root 'welcome#index'
-
+  
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
   get "/dashboard" => "links#manage"
-  resources :session, only: [:new, :create, :destroy]
-  resources :users
+  get "/signup" => "users#new"
+  post "/users" => "users#create"
 
   resources :links
   

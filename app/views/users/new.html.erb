@@ -1,22 +1,20 @@
-<div class="container">
-  <h3>Sign Up</h3>
+<h3 class="text-center">Sign Up</h3>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
     <%= form_for @user do |f| %>
-    <div class="form-group">
-      <%= f.label :username, "Username" %><br>
+      <%= f.label :username, "Username"%><br>
       <%= f.text_field :username, required: true, autofocus: true %>
-    </div>
-    <div class="form-group">
-      <%= f.label :email, "Email" %><br>
-      <%= f.email_field :email, required: true, autofocus: true, type: "email" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password, "Password" %><br>
+      
+      <%= f.label :email, "Email"%>
+      <%= f.email_field :email, required: true, type: "email" %>
+      
+      <%= f.label :password, "Password"%>
       <%= f.password_field :password, required: true %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password_confirmation, "Confirm Password" %><br>
+      
+      <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation, required: true %>
-    </div>
-    <%= f.submit "Sign Up", class:"btn btn-default" %>
-  <% end %>
+      
+      <%= f.submit "Sign Up", class:"btn btn-signup" %>
+    <% end %>
+  </div>
 </div>

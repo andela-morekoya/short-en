@@ -3,14 +3,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where(email: params[:email]).first
-
-    if user && user.authenticate(params[:password])
+    user = User.where(email: params[:session][:email]).first
+    if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       redirect_to dashboard_path, notice: "Signed in successfully!"
     else
       flash[:alert] = "Invalid email or password"
-      render :new
+      redirect_to login_path
     end
   end
 

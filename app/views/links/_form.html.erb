@@ -1,11 +1,15 @@
 <%= form_for @link, remote: true do |f| %>
   <div class="input-group">
     <%= f.text_field :original, :class => "form-control input-lg url",
-        :placeholder => "Paste your link, shorten it and share" %>
+        placeholder: "Paste your link, shorten it and share" %>
     <span class="input-group-btn">
       <%= f.submit 'Shorten', :class => "btn btn-lg"%>
     </span>
   </div>
-<div id="error-explanation"></div>
+  <% #if current_user %>
+    <% f.text_field :slug, class: "form-control input-lg vanity",
+      placeholder: "Your vanity string (optional)" %>
+  <% #end %>
+  <div id="error-explanation"></div>
 <% end %>
 <div class="result center"></div>

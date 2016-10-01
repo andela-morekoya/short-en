@@ -15,8 +15,12 @@ class Link < ActiveRecord::Base
   end
 
   def get_title
-    page = Net::HTTP.get(URI(self.original))
-    Nokogiri::HTML::Document.parse(page).title.squish
+    begin
+      page = Net::HTTP.get(URI(self.original))
+      Nokogiri::HTML::Document.parse(page).title.squish
+    rescue SocketError
+      self.original
+    end
   end
 
   def self.popular

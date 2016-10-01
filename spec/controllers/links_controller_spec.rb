@@ -8,7 +8,7 @@ RSpec.describe LinksController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    {:original => "something.com", :user_id => 2}
+    {:original => "something", :user_id => 2}
     {:original => Faker::Internet.url, :user_id => nil}
   }
 
@@ -23,6 +23,7 @@ RSpec.describe LinksController, type: :controller do
   describe "GET #new" do
     it "assigns a new link as @link" do
       get :new, params: {}
+
       expect(assigns(:link)).to be_a_new(Link)
     end
   end
@@ -31,7 +32,7 @@ RSpec.describe LinksController, type: :controller do
     context "with valid params" do
       it "creates a new Link" do
         expect {
-          post :create, params: {link: valid_attributes}
+          post :create, params: {link: :valid_attributes}
         }.to change(Link, :count).by(1)
       end
 

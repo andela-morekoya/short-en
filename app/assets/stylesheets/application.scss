@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "colors"; 
+@import "box_sizing"; 
 
 body{
   color: $black;
@@ -42,6 +43,7 @@ body{
 
 .navbar-header a:hover, a:focus{
   text-decoration: none;
+  color:white;
 }
 
 .navbar-inverse .navbar-nav > li > a{
@@ -60,7 +62,7 @@ a.sign-up{
 }
 
 .jumbotron{
-  background-color: $grey;
+  background-color: $yellow;
 }
 
 .jumbotron .btn a{
@@ -102,6 +104,21 @@ a.sign-up{
 .panel-heading{
   color: white;
   background-color: $black;
+}
+
+input, select, .uneditable-input{
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input{
+  height: auto;
+}
+
+.btn-signup{
+  background-color: $yellow;
+  color: $navy;
 }
 
 #footer{
