@@ -10,15 +10,18 @@ class LinksController < ApplicationController
   layout "dashboard", only: :manage
 
   def show
-    if params[:slug]
-      @link = Link.find_by(slug: params[:slug])
-      if @link && @link.active
-        Visit.create(params[link_id: @link.id])
-      elsif @link && !@link.active
-        render "layouts/error", locals: {reason: "inactive"}
-      else
-        render "layouts/error", locals: {reason: "deleted"}
-      end
+    @link = Link.find_by(slug: params[:slug])
+    if @link && @link.active
+      Visit.create(
+                    link_id: @link.id, 
+                    user_id: current_user.id, 
+                    ip_address: request.remote_ip
+                  )
+      redirect_to @link.original
+    elsif @link && !@link.active
+      render "layouts/error", locals: {reason: "inactive"}
+    else
+      render "layouts/error", locals: {reason: "deleted"}
     end
   end
 
@@ -42,7 +45,6 @@ class LinksController < ApplicationController
       else
         format.html { render :form, notice: "Please paste the full URL (with http)" }
         format.js
-        # format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
   end

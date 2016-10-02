@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   
   get ":slug" => "links#show"
 
-  get "*unmatched_route", to: "application#no_route_found"
+  get "*unmatched_route", to: "application#error"
 end

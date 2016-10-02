@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930121507) do
+ActiveRecord::Schema.define(version: 20161001134427) do
 
   create_table "links", force: :cascade do |t|
     t.string   "original"
@@ -31,11 +31,14 @@ ActiveRecord::Schema.define(version: 20160930121507) do
   end
 
   create_table "visits", force: :cascade do |t|
-    t.integer  "link_id",    default: 0
-    t.integer  "user_id",    default: 0
-    t.integer  "count",      default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "link_id"
+    t.integer  "user_id"
+    t.string   "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
+
+  add_index "visits", ["link_id"], name: "index_visits_on_link_id"
+  add_index "visits", ["user_id"], name: "index_visits_on_user_id"
 
 end

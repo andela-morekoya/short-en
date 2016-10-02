@@ -18,10 +18,6 @@ before_action :update_params, only: [ :update]
     end
   end
 
-  def edit
-    # @user = User.find(params[:id])
-  end
-
   def update
     @user = User.update(update_params)
   end

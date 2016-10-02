@@ -6,21 +6,12 @@ class Link < ActiveRecord::Base
   validates :user_id, :original, presence: true
   validates :original, format: { 
                                   with: URI.regexp,
-                                  notice: 'Your URL should include http/https' 
+                                  notice: 'Please enter a valid URL' 
                                 }
   validates :slug, uniqueness: true
 
   def shortened_url
     ENV["BASE_URL"] + self.slug
-  end
-
-  def get_title
-    begin
-      page = Net::HTTP.get(URI(self.original))
-      Nokogiri::HTML::Document.parse(page).title.squish
-    rescue SocketError
-      self.original
-    end
   end
 
   def self.popular
@@ -35,11 +26,19 @@ class Link < ActiveRecord::Base
 
   def convert_original_url
     alphabet = ("a".."z").to_a + (0..9).to_a
-    self.slug = (0...6).map{ alphabet.sample }.join
+    self.slug ||= (0...6).map{ alphabet.sample }.join
   end
 
   def set_title
-    self.title ||= self.get_title
-    self.title = self.original if self.title.nil?
+    self.title = self.get_title
+  end
+
+  def get_title
+    begin
+      page = Net::HTTP.get(URI(self.original))
+      Nokogiri::HTML::Document.parse(page).title.squish
+    rescue SocketError
+      self.original
+    end
   end
 end
