@@ -13,13 +13,12 @@ class LinksController < ApplicationController
     if params[:slug]
       @link = Link.find_by(slug: params[:slug])
       if @link && @link.active
-        @link.visits += 1 if redirect_to @link.original, status: 301
-        @link.save
+        Visit.create(params[link_id: @link.id])
+      elsif @link && !@link.active
+        render "layouts/error", locals: {reason: "inactive"}
       else
-        render "layouts/not_found"
+        render "layouts/error", locals: {reason: "deleted"}
       end
-    else
-      @link = Link.find_by(id: params[:id])
     end
   end
 
