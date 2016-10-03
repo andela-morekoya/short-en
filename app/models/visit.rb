@@ -2,8 +2,9 @@ class Visit < ActiveRecord::Base
   belongs_to :user
   belongs_to :link
 
-  scope :popular_links, -> { group(:link_id) }
-  scope :influential_users, -> { where.not(user_id: 0).group(:user_id) }
+  scope :popular_links,     -> { group(:link_id) }
+  scope :registered,        -> { select(:user_id).where.not(user_id: 0) }
+  scope :influential_users, -> { group(:user_id) }
 
   def self.save_visit(link, user, ip)
     visit = Visit.new
