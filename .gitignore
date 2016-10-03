@@ -21,6 +21,7 @@ config/initializers/secret_token.rb
 # dotenv
 .env
 env_vars.rb
+boot.rb
 
 ## Environment normalization:
 /.bundle

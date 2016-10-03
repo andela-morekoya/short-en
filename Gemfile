@@ -10,7 +10,6 @@ gem "jquery-rails"
 gem "turbolinks"
 gem 'jbuilder', '~> 2.0'
 gem "bcrypt", "~> 3.1.7"
-gem "simple_form", "~> 3.3", ">= 3.3.1"
 gem "puma", "~> 3.6"
 gem "json"
 gem "coveralls", require: false
