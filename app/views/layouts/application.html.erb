@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Short.en | URL Shortener</title>
@@ -8,26 +8,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="wrapper">
-    <div id="header">
-      <%= select_nav %>
-    </div>  
+  
+  <%= select_nav %>
+  
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <%= value %>
+    </div> 
+  <% end %>
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <%= value %>
-      </div> 
-    <% end %>
+  <%= yield %>
 
-    <div id="content">
-      <%= yield %>
-    </div>
+  <%= render "layouts/footer" %>
 
-    <div id="footer">
-      <%= render "layouts/footer" %>
-    </div>
 </body>
 </html>

@@ -1,5 +1,4 @@
 class LinksController < ApplicationController
-  before_action :set_link, only: [:edit, :update, :destroy]
   before_action :authenticate, 
                 except: [ 
                           :show, 
@@ -7,7 +6,9 @@ class LinksController < ApplicationController
                           :create, 
                           notice: "You must be logged in to view this page"
                         ]
-  layout "dashboard", only: :manage
+  before_action :set_link, only: [:edit, :update, :destroy]
+  before_action :my_links, only: [:index, :create]
+  
 
   def show
     @link = Link.find_by(slug: params[:slug])
@@ -25,8 +26,11 @@ class LinksController < ApplicationController
     end
   end
 
+  def index
+    @link = Link.new
+  end
+
   def new
-    current_user
     @link = Link.new
   end
 
@@ -40,10 +44,12 @@ class LinksController < ApplicationController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to root_path, notice: 'Link was successfully created.' }
+        format.html { redirect_to root_path, 
+                      notice: 'Link was successfully created.' }
         format.js 
       else
-        format.html { render :form, notice: "Please paste the full URL (with http)" }
+        format.html { render :form, 
+                      alert: "Please paste a valid URL (with http)" }
         format.js
       end
     end
@@ -56,28 +62,24 @@ class LinksController < ApplicationController
       else
         format.html { redirect_to :dashboard, notice: 'Error occured' }
         format.js
-        format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def manage
-    @link = Link.new
-    @links = Link.where(user_id: current_user.id).order(created_at: :desc)
-    render "index"
   end
     
   def destroy
     @link.destroy
     respond_to do |format|
       format.html { redirect_to :dashboard, notice: 'Link deleted successfully.' }
-      format.json { head :no_content }
     end
   end
 
   private
     def set_link
       @link = Link.find(params[:id])
+    end
+
+    def my_links
+      @links = Link.where(user_id: current_user.id).order(created_at: :desc)
     end
 
     def new_link_params

@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-  # devise_for :users, controllers: { 
-  #   registrations: 'users/registrations',
-  #   sessions: "users/sessions" }
-
   root 'welcome#index'
   
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  get "/dashboard" => "links#manage"
+  get "/dashboard" => "links#index"
   get "/signup" => "users#new"
   post "/users" => "users#create"
 

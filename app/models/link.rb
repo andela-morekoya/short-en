@@ -1,17 +1,20 @@
 class Link < ActiveRecord::Base
   belongs_to :user
   has_many :visits
-  before_create :convert_original_url, :set_title
-  before_update :set_title
   validates :user_id, :original, presence: true
   validates :original, format: { 
-                                  with: URI.regexp,
+                                  with: URI::regexp,
                                   notice: 'Please enter a valid URL' 
                                 }
   validates :slug, uniqueness: true
+  before_save :set_slug, :set_title
 
   def shortened_url
     ENV["BASE_URL"] + self.slug
+  end
+
+  def visits
+    Visit.where(link_id: self.id).count
   end
 
   def self.popular
@@ -24,9 +27,17 @@ class Link < ActiveRecord::Base
 
   protected
 
+  def set_slug
+    self.slug = self.slug.parameterize if self.slug
+
+    if self.slug.nil? || self.slug.empty?
+      self.slug = convert_original_url
+    end
+  end
+
   def convert_original_url
     alphabet = ("a".."z").to_a + (0..9).to_a
-    self.slug ||= (0...6).map{ alphabet.sample }.join
+    (0...6).map{ alphabet.sample }.join
   end
 
   def set_title
@@ -37,8 +48,8 @@ class Link < ActiveRecord::Base
     begin
       page = Net::HTTP.get(URI(self.original))
       Nokogiri::HTML::Document.parse(page).title.squish
-    rescue SocketError
-      self.original
+    rescue SocketError, OpenTimeout => e
+      e.message
     end
   end
 end

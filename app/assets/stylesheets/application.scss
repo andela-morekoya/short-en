@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "colors"; 
 @import "box_sizing"; 
+@import "spinner"; 
 
 body{
   color: $black;
@@ -119,6 +120,12 @@ input{
 .btn-signup{
   background-color: $yellow;
   color: $navy;
+}
+
+.dropdown-menu.vanity{
+  margin: 0;
+  padding: 0;
+  min-width: 30em;
 }
 
 #footer{
