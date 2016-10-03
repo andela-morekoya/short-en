@@ -9,20 +9,14 @@ class Link < ActiveRecord::Base
   validates :slug, uniqueness: true
   before_save :set_slug, :set_title
 
+  scope :recent, -> { order(created_at: :desc) }
+
   def shortened_url
     ENV["BASE_URL"] + self.slug
   end
 
-  def visits
-    Visit.where(link_id: self.id).count
-  end
-
-  def self.popular
-    Link.order(visits: :desc).first(7)
-  end
-
-  def self.recent
-    Link.order(created_at: :desc).first(7)
+  def visit_count
+    self.visits.count
   end
 
   protected

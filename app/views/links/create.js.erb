@@ -1,30 +1,33 @@
 $('.btn-shorten').click(function(){
-  $(".spinner").show();
+  $('.spinner').show();
 });
 
 $('.url').val('');
 
-new Clipboard('.btn-copy');
-
 <% unless @link.slug.empty? %>
-$(".spinner").hide();
-$('.result').html('<br><p>Your Shortened Link: ' 
-  + '<span id="short_url">'
-  + '<%= link_to @link.shortened_url, @link.shortened_url %>&nbsp;</span>'
-  + '<button class="btn btn-default btn-copy" '
-  + 'data-clipboard-text="<%= @link.shortened_url %>" '
-  + 'data-clipboard-action="copy" data-clipboard-target="#short_url" '
-  + 'data-toggle="popover" data-trigger="focus" '
-  + 'data-content="Copied to clipboard">' 
-  + 'Copy Shortened URL</button></p><br>');
- $('.my-links').html("<%= j(render 'links/my_links').html_safe %>");
+  $('.spinner').hide();
+
+  new Clipboard('.btn-copy');
+
+  $('.result').html('<br><p>Your Shortened Link: ' 
+    + '<span id="short_url">'
+    + '<%= link_to @link.shortened_url, @link.shortened_url %>&nbsp;</span>'
+    + '<button class="btn btn-default btn-copy" '
+    + 'data-clipboard-text="<%= @link.shortened_url %>" '
+    + 'data-clipboard-action="copy" data-clipboard-target="#short_url" '
+    + 'data-toggle="popover" data-trigger="focus" '
+    + 'data-content="Copied to clipboard">' 
+    + 'Copy Shortened URL</button></p><br>');
+  <% if current_user %>
+    $('.my-links').html("<%= j(render 'links/my_links').html_safe %>");
+  <% end %>
 <% end %>
 
 <% if @link.errors.any? %>
-$(".spinner").hide();
-$('#error-explanation').html(''
-  + '<h4><%= pluralize(@link.errors.count, "error") %>'
-  + ' stopped this link from being created:</h4>'
-  + '<ul><% @link.errors.full_messages.each do |msg| %>'
-  + '<li><%= msg.gsub("Original", "URL") %></li><% end %></ul>');
+  $(".spinner").hide();
+  $('#error-explanation').html(''
+    + '<h4><%= pluralize(@link.errors.count, "error") %>'
+    + ' stopped this link from being created:</h4>'
+    + '<ul><% @link.errors.full_messages.each do |msg| %>'
+    + '<li><%= msg.gsub("Original", "URL") %></li><% end %></ul>');
 <% end %>

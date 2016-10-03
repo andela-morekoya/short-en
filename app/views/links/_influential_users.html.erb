@@ -6,7 +6,7 @@
     <ul class="list-group">
     <% @influential_users.each do |name, index| %>
     <li class="presentation list-group-item">
-      <%= name.capitalize %>
+      <%= name.user.username.capitalize %>
     </li>
     <% end %>
     </ul>

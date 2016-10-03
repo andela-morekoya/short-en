@@ -13,11 +13,7 @@ class LinksController < ApplicationController
   def show
     @link = Link.find_by(slug: params[:slug])
     if @link && @link.active
-      Visit.create(
-                    link_id: @link.id, 
-                    user_id: current_user.id, 
-                    ip_address: request.remote_ip
-                  )
+      Visit.save_visit(@link, current_user, request.remote_ip)
       redirect_to @link.original
     elsif @link && !@link.active
       render "layouts/error", locals: {reason: "inactive"}
@@ -79,7 +75,9 @@ class LinksController < ApplicationController
     end
 
     def my_links
-      @links = Link.where(user_id: current_user.id).order(created_at: :desc)
+      if current_user
+        @links = Link.where(user_id: current_user.id).order(created_at: :desc)
+      end
     end
 
     def new_link_params

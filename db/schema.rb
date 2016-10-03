@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001134427) do
+ActiveRecord::Schema.define(version: 20161003090303) do
 
   create_table "links", force: :cascade do |t|
     t.string   "original"
     t.string   "slug"
-    t.integer  "visits",     default: 0
     t.boolean  "active",     default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
