@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { 
-    registrations: 'users/registrations',
-    sessions: "users/sessions" }
+  root "welcome#index"
 
-  root 'welcome#index'
-
-  get "/dashboard" => "links#manage"
-
-  resources :users 
+  get "/login"     => "sessions#new"
+  post "/login"    => "sessions#create"
+  get "/logout"    => "sessions#destroy"
+  get "/dashboard" => "links#index"
+  get "/signup"    => "users#new"
+  post "/users"    => "users#create"
 
   resources :links
-  
+
   get ":slug" => "links#show"
 
-  get "*unmatched_route", to: "application#no_route_found"
+  get "*unmatched_route", to: "application#error"
 end

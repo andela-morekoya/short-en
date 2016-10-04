@@ -4,10 +4,12 @@
   </div>
   <div class="panel-body">
     <ul class="list-group">
-    <% @influential_users.each do |name, index| %>
-    <li class="presentation list-group-item">
-      <%= name.capitalize %>
-    </li>
+    <% if @influential_users.any? %>
+      <% @influential_users.each do |name, index| %>
+      <li class="presentation list-group-item">
+        <%= name.user.username.capitalize %>
+      </li>
+      <% end %>
     <% end %>
     </ul>
   </div>

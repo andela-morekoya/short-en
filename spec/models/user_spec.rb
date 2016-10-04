@@ -1,49 +1,23 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
-  it "is valid with a username, email and password" do
-    user = User.new(
-      username: "random",
-      email: "random@something.com",
-      password: "something_else")
-        
-    expect(user).to be_valid
+  subject do
+    User.new(username: "example",
+             email: "user@example.com",
+             password: "p@ssw0rd",
+             password_confirmation: "p@ssw0rd")
   end
 
-  it "is invalid without a username" do
-    user = User.new(username: nil)
-    
-    user.valid?
-    
-    expect(user.errors[:username]).to include("can't be blank")
-  end
+  it { is_expected.to validate_presence_of(:username) }
+  it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
 
-  it "is invalid without an email" do
-    user = User.new(email: nil)
+  it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  it { is_expected.to allow_value("email@valid.com").for(:email) }
+  it { is_expected.to_not allow_value("email@invalid").for(:email) }
 
-    user.valid?
+  it { is_expected.to have_secure_password }
+  it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
-    expect(user.errors[:email]).to include("can't be blank")
-  end
-
-  it "is invalid without a password" do
-    user = User.new(password: nil)
-
-    user.valid?
-
-    expect(user.errors[:password]).to include("can't be blank")
-  end
-
-  it "does not accept duplicate emails" do
-    User.create(
-      username: "random",
-      email: "random@something.com",
-      password: "something_else")
-
-    user2 = User.new(email: "random@something.com")
-
-    user2.valid?
-
-    expect(user2.errors[:email]).to include "has already been taken"
-  end
+  it { is_expected.to have_many(:links) }
 end

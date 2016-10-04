@@ -3,9 +3,9 @@ scss:
 
 ruby:
  config_file: .rubocop.yml
+ enabled: true
 
-javascript:
- ignore_file: .javascript_ignore
- config_file: .jshintrc
+jshint:
+ enabled: false
 
 fail_on_violations: true
