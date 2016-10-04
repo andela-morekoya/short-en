@@ -6,7 +6,6 @@
 
 $(function() {
   $('.alert').delay(1000).slideUp(500);
-  $('.spinner').hide();
 });
 
 

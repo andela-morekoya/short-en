@@ -42,8 +42,8 @@ class Link < ActiveRecord::Base
     begin
       page = Net::HTTP.get(URI(self.original))
       Nokogiri::HTML::Document.parse(page).title.squish
-    rescue SocketError, OpenTimeout => e
-      e.message
+    rescue SocketError, Net::OpenTimeout, NoMethodError
+      page = self.original
     end
   end
 end

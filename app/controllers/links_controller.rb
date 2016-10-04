@@ -1,11 +1,5 @@
 class LinksController < ApplicationController
-  before_action :authenticate, 
-                except: [ 
-                          :show, 
-                          :new, 
-                          :create, 
-                          notice: "You must be logged in to view this page"
-                        ]
+  before_action :authenticate, except: [:show, :new, :create]
   before_action :set_link, only: [:edit, :update, :destroy]
   before_action :my_links, only: [:index, :create]
   
@@ -44,8 +38,8 @@ class LinksController < ApplicationController
                       notice: 'Link was successfully created.' }
         format.js 
       else
-        format.html { render :form, 
-                      alert: "Please paste a valid URL (with http)" }
+        format.html { redirect_to root_path, 
+                      alert: "Please enter a valid URL (with http)" }
         format.js
       end
     end

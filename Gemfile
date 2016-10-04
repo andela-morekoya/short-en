@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+  source "https://rubygems.org"
 
 ruby "2.3.1"
 gem "rails", "~> 4.2.6"
@@ -19,6 +19,7 @@ group :development, :test do
   gem "sqlite3"
   gem "byebug"
   gem "capybara", "~> 2.8", ">= 2.8.1"
+  gem "capybara-webkit"
   gem "rspec-rails", "~> 3.5", ">= 3.5.2"
   gem "meta_request", "~> 0.4.0"
 end
@@ -32,6 +33,7 @@ group :test do
   gem "shoulda-matchers"
   gem "faker"
   gem "codeclimate-test-reporter", require: nil
+  gem 'database_cleaner'
 end
 
 group :production do

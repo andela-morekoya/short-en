@@ -8,19 +8,19 @@
           <div class="panel-heading" role="tab" id="heading<%= link.id %>">
             <h4 class="panel-title">
             <div class="row flex-items-xs-middle">
-              <div class="col-md-9">
+              <div class="col-sm-12 col-md-9">
                 <%= link_to link.title, link.shortened_url, target: "_blank" %> 
                 <%= " - " + link.shortened_url %>
               </div>
-              <a class= "collapsed col-md-1 "role="button" 
+              <a class= "collapsed col-sm-4 col-md-1 "role="button" 
                 data-toggle="collapse" data-parent="#accordion" 
                 href="#collapse-detail<%= link.id %>" aria-expanded="true" 
                 aria-controls="collapse-detail<%= link.id %>">Details</a>
-              <a class= "collapsed col-md-1 "role="button" 
+              <a class= "collapsed col-sm-4 col-md-1 "role="button" 
                 data-toggle="collapse" data-parent="#accordion" 
                 href="#collapse-edit<%= link.id %>" aria-expanded="true" 
                 aria-controls="collapse-edit<%= link.id %>">Edit</a>
-              <div class="delete-link col-md-1">
+              <div class="delete-link col-sm-4 col-md-1">
                 <%= link_to 'Delete', link, method: :delete, 
                   data: { confirm: 'Are you sure?' } %>
               </div>
@@ -58,11 +58,11 @@
               Original URL : 
               <%= f.url_field :original, required: true, class: "form-control" %>
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-6">
                   <label>Set Vanity String Slug: </label> 
                   <%= f.text_field :slug, required: true%>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-6 col-md-2">
                   <label>Activate Link: </label>
                   <%= f.check_box :active, class: "checkbox-lg" %>
                 </div>
