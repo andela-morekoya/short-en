@@ -21,6 +21,7 @@ group :development, :test do
   gem 'capybara', '~> 2.8', '>= 2.8.1'
   gem 'capybara-webkit'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
+  gem 'factory_girl_rails'
   gem 'meta_request', '~> 0.4.0'
 end
 

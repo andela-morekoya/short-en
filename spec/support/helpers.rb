@@ -14,8 +14,7 @@ def shorten_link_with_vanity(url, vanity)
   fill_in 'link_original', with: url
   find('.dropdown-toggle').click
   fill_in 'link_slug', with: vanity
-  find('.dropdown-toggle').click
-  find("[name='commit']").click
+  find_button("Shorten").trigger("click")
 end
 
 def fill_signup_form

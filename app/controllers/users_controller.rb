@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :signup_params, only: [:create]
-  before_action :update_params, only: [:update]
-
+  
   def new
     @user = User.new
   end
@@ -18,14 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    @user = User.update(update_params)
-  end
-
-  def destroy
-    @user = User.find(params[:id])
-  end
-
   protected
 
   def signup_params
@@ -35,9 +26,5 @@ class UsersController < ApplicationController
       :password,
       :password_confirmation
     )
-  end
-
-  def update_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

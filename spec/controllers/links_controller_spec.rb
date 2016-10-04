@@ -3,10 +3,6 @@ require 'rails_helper'
 RSpec.describe LinksController, type: :controller do
   include RSpec::Rails::RequestExampleGroup
 
-  let(:valid_attributes) do
-    { original: Faker::Internet.url, user_id: 2 }
-  end
-
   let(:invalid_attributes) do
     { original: 'something', user_id: nil }
   end
@@ -19,7 +15,7 @@ RSpec.describe LinksController, type: :controller do
 
   describe 'GET #show' do
     it 'redirects slug to original url' do
-      link = Link.create! valid_attributes
+      link = Link.create(FactoryGirl.attributes_for(:link))
       get link.shortened_url
       expect(response).to redirect_to(link.original)
     end
@@ -29,7 +25,7 @@ RSpec.describe LinksController, type: :controller do
     context 'with invalid params' do
       it 'should raise error' do
         expect do
-          post :create, params: { link: :invalid_attributes }
+          post :create, link: { original: "something" }
         end.to raise_error(URI::InvalidURIError)
       end
     end
