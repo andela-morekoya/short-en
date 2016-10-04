@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-before_action :signup_params, only: [:create]
-before_action :update_params, only: [ :update]
+  before_action :signup_params, only: [:create]
+  before_action :update_params, only: [:update]
 
   def new
     @user = User.new
@@ -11,7 +11,7 @@ before_action :update_params, only: [ :update]
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to dashboard_path, notice: "Account created successfully!"
+      redirect_to dashboard_path, notice: 'Account created successfully!'
     else
       flash[:alert] = @user.errors.full_messages[0]
       render :new
@@ -29,7 +29,12 @@ before_action :update_params, only: [ :update]
   protected
 
   def signup_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(
+      :username,
+      :email,
+      :password,
+      :password_confirmation
+    )
   end
 
   def update_params

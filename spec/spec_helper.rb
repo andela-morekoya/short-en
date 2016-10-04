@@ -1,8 +1,8 @@
 require 'coveralls'
 require 'codeclimate-test-reporter'
 require 'capybara/rspec'
-require "support/helpers"
-require "support/database_cleaner"
+require 'support/helpers'
+require 'support/database_cleaner'
 
 Coveralls.wear!('rails')
 CodeClimate::TestReporter.start
@@ -17,5 +17,4 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
 end
