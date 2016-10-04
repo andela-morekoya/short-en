@@ -4,7 +4,7 @@ class Link < ActiveRecord::Base
   validates :user_id, :original, presence: true
   validates :original, format: {
     with: URI.regexp,
-    notice: 'Please enter a valid URL'
+    notice: "Please enter a valid URL"
   }
   validates :slug, uniqueness: true
   before_save :set_slug, :set_title
@@ -12,7 +12,7 @@ class Link < ActiveRecord::Base
   scope :recent, -> { order(created_at: :desc) }
 
   def shortened_url
-    ENV['BASE_URL'] + slug
+    ENV["BASE_URL"] + slug
   end
 
   def visit_count
@@ -28,7 +28,7 @@ class Link < ActiveRecord::Base
   end
 
   def convert_original_url
-    alphabet = ('a'..'z').to_a + (0..9).to_a
+    alphabet = ("a".."z").to_a + (0..9).to_a
     (0...6).map { alphabet.sample }.join
   end
 

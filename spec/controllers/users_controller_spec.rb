@@ -1,16 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  describe 'GET #new' do
-    it 'shows the create account page' do
+  describe "GET #new" do
+    it "shows the create account page" do
       get :new
       expect(assigns(:user)).to be_a_new User
-      expect(response).to render_template('new')
+      expect(response).to render_template("new")
     end
   end
 
-  describe '#create' do
-    it 'creates valid user' do
+  describe "#create" do
+    it "creates valid user" do
       expect do
         post :create, user: FactoryGirl.attributes_for(:user)
       end.to change(User, :count).by 1
@@ -19,4 +19,3 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 end
-

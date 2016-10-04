@@ -1,10 +1,10 @@
-require 'coveralls'
-require 'codeclimate-test-reporter'
-require 'capybara/rspec'
-require 'support/helpers'
-require 'support/database_cleaner'
+require "coveralls"
+require "codeclimate-test-reporter"
+require "capybara/rspec"
+require "support/helpers"
+require "support/database_cleaner"
 
-Coveralls.wear!('rails')
+Coveralls.wear!("rails")
 CodeClimate::TestReporter.start
 
 RSpec.configure do |config|

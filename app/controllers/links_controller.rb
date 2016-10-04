@@ -9,9 +9,9 @@ class LinksController < ApplicationController
       Visit.save_visit(@link, current_user, request.remote_ip)
       redirect_to @link.original
     elsif @link && !@link.active
-      render 'layouts/error', locals: { reason: 'inactive' }
+      render "layouts/error", locals: { reason: "inactive" }
     else
-      render 'layouts/error', locals: { reason: 'deleted' }
+      render "layouts/error", locals: { reason: "deleted" }
     end
   end
 
@@ -24,7 +24,7 @@ class LinksController < ApplicationController
   end
 
   def edit
-    render 'index'
+    render "index"
   end
 
   def create
@@ -34,14 +34,12 @@ class LinksController < ApplicationController
     respond_to do |format|
       if @link.save
         format.html do
-          redirect_to root_path,
-                      notice: 'Link was successfully created.'
+          redirect_to root_path, notice: "Link was successfully created."
         end
         format.js
       else
         format.html do
-          redirect_to root_path,
-                      alert: 'Please enter a valid URL (with http)'
+          redirect_to root_path, alert: "Please enter a valid URL (with http)"
         end
         format.js
       end
@@ -52,11 +50,10 @@ class LinksController < ApplicationController
     respond_to do |format|
       if @link.update(link_params)
         format.html do
-          redirect_to :dashboard,
-                      notice: 'Link updated successfully.'
+          redirect_to :dashboard, notice: "Link updated successfully."
         end
       else
-        format.html { redirect_to :dashboard, notice: 'Error occured' }
+        format.html { redirect_to :dashboard, notice: "Error occured" }
         format.js
       end
     end
@@ -66,8 +63,7 @@ class LinksController < ApplicationController
     @link.destroy
     respond_to do |format|
       format.html do
-        redirect_to :dashboard,
-                    notice: 'Link deleted successfully.'
+        redirect_to :dashboard, notice: "Link deleted successfully."
       end
     end
   end

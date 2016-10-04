@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :signup_params, only: [:create]
-  
+
   def new
     @user = User.new
   end
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to dashboard_path, notice: 'Account created successfully!'
+      redirect_to dashboard_path, notice: "Account created successfully!"
     else
       flash[:alert] = @user.errors.full_messages[0]
       render :new

@@ -8,7 +8,7 @@ RSpec.feature "Registered User Features", type: :feature do
   end
 
   describe "User visits site", js: true do
-    context "enters valid url with vanity string"  do
+    context "enters valid url with vanity string" do
       it "returns a service shortened URL with specified vanity" do
         visit dashboard_path
         shorten_link_with_vanity(Faker::Internet.url, "vanity")

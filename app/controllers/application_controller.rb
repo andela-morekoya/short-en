@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def no_route_found
     flash[:notice] = :invalid_address
-    render 'not_found'
+    render "not_found"
   end
 
   protected
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     unless current_user
-      redirect_to login_path, alert: 'You need to log in or sign up'
+      redirect_to login_path, alert: "You need to log in or sign up"
     end
   end
 end
