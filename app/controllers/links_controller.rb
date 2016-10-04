@@ -36,13 +36,12 @@ class LinksController < ApplicationController
         format.html do
           redirect_to root_path, notice: "Link was successfully created."
         end
-        format.js
       else
         format.html do
           redirect_to root_path, alert: "Please enter a valid URL (with http)"
         end
-        format.js
       end
+      format.js
     end
   end
 
