@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/login"     => "sessions#new"
   post "/login"    => "sessions#create"
   get "/logout"    => "sessions#destroy"
-  get "/dashboard" => "links#index"
+  get "/dashboard" => "links#dashboard"
   get "/signup"    => "users#new"
   post "/users"    => "users#create"
 

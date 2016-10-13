@@ -1,13 +1,14 @@
 class LinksController < ApplicationController
   before_action :authenticate, except: [:show, :new, :create]
   before_action :set_link, only: [:edit, :update, :destroy]
-  before_action :my_links, only: [:index, :create]
+  before_action :my_links, only: [:dashboard, :create]
 
   def show
     @link = Link.find_by(slug: params[:slug])
+
     if @link && @link.active
       Visit.save_visit(@link, current_user, request.remote_ip)
-      redirect_to @link.original
+      redirect_to @link.original, external: true
     elsif @link && !@link.active
       render "layouts/error", locals: { reason: "inactive" }
     else
@@ -15,7 +16,7 @@ class LinksController < ApplicationController
     end
   end
 
-  def index
+  def dashboard
     @link = Link.new
   end
 
@@ -24,17 +25,20 @@ class LinksController < ApplicationController
   end
 
   def edit
-    render "index"
   end
 
   def create
     @link = Link.new(new_link_params)
-    @link.user_id = current_user ? current_user.id : 0
+    @link.user_id = if current_user 
+                      current_user.id
+                    else
+                      0
+                    end
 
     respond_to do |format|
       if @link.save
         format.html do
-          redirect_to root_path, notice: "Link was successfully created."
+          redirect_to root_path, notice: "Link was successfully created"
         end
       else
         format.html do
@@ -43,28 +47,42 @@ class LinksController < ApplicationController
       end
       format.js
     end
+
+    # if @link.save
+    #   redirect_to root_path, notice: "Link was successfully created"
+    # else
+    #   redirect_to root_path, alert: "Please enter a valid URL (with http)"
+    # end
   end
 
   def update
     respond_to do |format|
       if @link.update(link_params)
         format.html do
-          redirect_to :dashboard, notice: "Link updated successfully."
+          redirect_to :dashboard, notice: "Link updated successfully"
         end
       else
-        format.html { redirect_to :dashboard, notice: "Error occured" }
+        format.html { redirect_to :dashboard, alert: "Error occured" }
         format.js
       end
     end
+
+    # if @link.update(link_params)
+    #   redirect_to :dashboard, notice: "Link updated successfully"
+    # else
+    #   redirect_to :dashboard, alert: "Error occured"
+    # end
   end
 
   def destroy
     @link.destroy
     respond_to do |format|
       format.html do
-        redirect_to :dashboard, notice: "Link deleted successfully."
+        redirect_to :dashboard, notice: "Link deleted successfully"
       end
     end
+
+    # redirect_to :dashboard, notice: "Link deleted successfully"
   end
 
   private

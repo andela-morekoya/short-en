@@ -1,10 +1,10 @@
-require "coveralls"
+require 'coveralls'
 require "codeclimate-test-reporter"
 require "capybara/rspec"
 require "support/helpers"
 require "support/database_cleaner"
 
-Coveralls.wear!("rails")
+Coveralls.wear!('rails')
 CodeClimate::TestReporter.start
 
 RSpec.configure do |config|
@@ -17,4 +17,8 @@ RSpec.configure do |config|
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
+end
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end

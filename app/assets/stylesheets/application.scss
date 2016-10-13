@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-switch";
 @import "colors"; 
 @import "box_sizing"; 
 
@@ -7,6 +8,7 @@ body{
   color: $black;
   margin: 0;
   padding: 0;
+  min-height: 50em;
   height: 100%;
 }
 
@@ -52,15 +54,6 @@ body{
   padding-bottom: 20px;
 }
 
-.sign-up{
-  background-color: $yellow;
-  color: $navy;
-}
-
-a.sign-up, a:focus{
-  color: $navy;
-}
-
 .jumbotron{
   background-color: $yellow;
 }
@@ -90,6 +83,7 @@ a.sign-up, a:focus{
 .badge{
   color: $black;
   background-color: $yellow;
+  padding: 5px 10px;
 }
 
 .list-group-item{
@@ -125,13 +119,6 @@ input{
   margin: 0;
   padding: 0;
   min-width: 30em;
-}
-
-#footer{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 5em;   
 }
 
 footer{

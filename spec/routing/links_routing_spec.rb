@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe LinksController, type: :routing do
   describe "routing" do
     it "routes to dashboard" do
-      expect(get: "/dashboard").to route_to("links#index")
+      expect(get: "/dashboard").to route_to("links#dashboard")
     end
 
     it "routes to #new" do

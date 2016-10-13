@@ -1,6 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Link, type: :model do
+  describe "associations" do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:visits) }
+  end
+
   it "is valid with a full original url and a user ID" do
     link = Link.new(original: Faker::Internet.url, user_id: "1")
 

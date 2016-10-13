@@ -22,7 +22,10 @@ group :development, :test do
   gem "capybara-webkit"
   gem "rspec-rails", "~> 3.5", ">= 3.5.2"
   gem "factory_girl_rails"
-  gem "meta_request", "~> 0.4.0"
+  gem "faker"
+  gem 'coveralls', require: false
+  gem "selenium-webdriver"
+  gem "chromedriver-helper"
 end
 
 group :development do
@@ -32,7 +35,6 @@ end
 
 group :test do
   gem "shoulda-matchers"
-  gem "faker"
   gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
 end

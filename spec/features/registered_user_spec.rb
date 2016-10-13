@@ -1,38 +1,36 @@
 require "rails_helper"
 
-RSpec.feature "Registered User Features", type: :feature do
-  before :each do
-    fill_signup_form
+RSpec.feature "Registered user visits site and logs in", type: :feature do
+  let!(:user) { FactoryGirl.create(:user, password: "password") }
+  
+  before do
+    login(user.email, "password")
     visit dashboard_path
-    shorten_link_with_vanity(Faker::Internet.url, Faker::Lorem.characters(6))
   end
 
-  describe "User visits site", js: true do
-    context "enters valid url with vanity string" do
-      it "returns a service shortened URL with specified vanity" do
-        visit dashboard_path
-        shorten_link_with_vanity(Faker::Internet.url, "vanity")
-        expect(page).to have_content "Your Shortened Link"
-        expect(Link.last.slug).to eq("vanity")
-      end
-    end
+  scenario "they can supply the vanity string to shorten url", js: true do
+    vanity = "vanity"
+    
+    shorten_link(Faker::Internet.url, vanity)
 
-    context "visit user page" do
-      it "lists of all user's service shortened URLs" do
-        visit dashboard_path
-        expect(page).to have_content Link.last.shortened_url
-      end
+    expect(page).to have_content "Your Shortened Link"
+    expect(Link.last.slug).to eq(vanity)
+  end
 
-      it "gives links to each url detail page" do
-        expect(page).to have_content "Detail"
-      end
-    end
+  scenario "they see all their shortened links" do
+    expect(page).to have_content Link.last.shortened_url
+  end
 
-    context "view a shortened URL details page" do
-      it "gives details about each individual who has used the URL" do
-        click_on("Detail")
-        expect(page).to have_content "IP Address"
-      end
-    end
+  scenario "they can get details of each of their links" do
+    click_link "Details"
+    expect(page).to have_content "IP Address"
+  end
+
+  scenario "they can deactivate a link" do
+    click_link "Edit"
+    uncheck "link_active"
+    click_button "Update Link"
+    click_link "Edit"
+    expect(find("#link_active")).to_not be_checked
   end
 end
