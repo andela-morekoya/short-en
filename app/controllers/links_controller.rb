@@ -29,7 +29,7 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(new_link_params)
-    @link.user_id = if current_user 
+    @link.user_id = if current_user
                       current_user.id
                     else
                       0

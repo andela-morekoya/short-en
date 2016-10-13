@@ -1,10 +1,10 @@
-require 'coveralls'
+require "coveralls"
 require "codeclimate-test-reporter"
 require "capybara/rspec"
 require "support/helpers"
 require "support/database_cleaner"
 
-Coveralls.wear!('rails')
+Coveralls.wear!("rails")
 CodeClimate::TestReporter.start
 
 RSpec.configure do |config|
@@ -20,5 +20,5 @@ RSpec.configure do |config|
 end
 
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
 end

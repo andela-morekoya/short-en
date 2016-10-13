@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "Registered user visits site and logs in", type: :feature do
   let!(:user) { FactoryGirl.create(:user, password: "password") }
-  
+
   before do
     login(user.email, "password")
     visit dashboard_path
@@ -10,7 +10,7 @@ RSpec.feature "Registered user visits site and logs in", type: :feature do
 
   scenario "they can supply the vanity string to shorten url", js: true do
     vanity = "vanity"
-    
+
     shorten_link(Faker::Internet.url, vanity)
 
     expect(page).to have_content "Your Shortened Link"

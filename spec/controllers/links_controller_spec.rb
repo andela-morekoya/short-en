@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe LinksController, type: :controller do
-  let (:user ) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
 
-  let (:link ) { Link.create(FactoryGirl.attributes_for(:link)) }
+  let(:link) { Link.create(FactoryGirl.attributes_for(:link)) }
 
   describe "before actions" do
     it { is_expected.to use_before_action(:authenticate) }
@@ -71,7 +71,7 @@ RSpec.describe LinksController, type: :controller do
         session[:user_id] = user.id
 
         get :edit, id: link.id
-        
+
         expect(response).to have_http_status(:success)
         expect(response).to render_template "edit"
       end
@@ -82,7 +82,7 @@ RSpec.describe LinksController, type: :controller do
     context "with invalid params" do
       it "should raise error" do
         post :create, link: { original: "something" }
-        
+
         expect(flash[:alert]).to eq "Please enter a valid URL (with http)"
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe LinksController, type: :controller do
   describe "#update" do
     context "when user is not registered" do
       it "asks user to login" do
-        patch :update, id: link.id, link: {slug: "updated"}
+        patch :update, id: link.id, link: { slug: "updated" }
         link.reload
 
         expect(response).to redirect_to login_path
@@ -110,7 +110,7 @@ RSpec.describe LinksController, type: :controller do
       it "updates the link" do
         session[:user_id] = user.id
 
-        patch :update, id: link.id, link: {slug: "updated"}
+        patch :update, id: link.id, link: { slug: "updated" }
         link.reload
 
         expect(flash[:notice]).to eq "Link updated successfully"
@@ -119,7 +119,7 @@ RSpec.describe LinksController, type: :controller do
     end
   end
 
-   describe "#destroy" do
+  describe "#destroy" do
     context "when user is not registered" do
       it "asks user to login" do
         delete :destroy, id: link.id

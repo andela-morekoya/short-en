@@ -5,7 +5,6 @@ def shorten_link(url, vanity = "")
   end
   find("#link_original").set url
   find(".btn-shorten").click
-
 end
 
 def login(email, password)

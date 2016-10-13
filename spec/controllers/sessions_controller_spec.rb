@@ -1,8 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
-
-  let (:user ) { FactoryGirl.create(:user, password: "correct") }
+  let(:user) { FactoryGirl.create(:user, password: "correct") }
 
   describe "#new" do
     it "renders login page" do
@@ -25,7 +24,7 @@ RSpec.describe SessionsController, type: :controller do
     context "with valid details" do
       it "successfully logs in user" do
         post :create, session: { email: user.email, password: "correct" }
-        
+
         expect(session[:user_id]).to_not be_nil
         expect(response).to redirect_to dashboard_path
       end
