@@ -1,6 +1,6 @@
 <div class="container-fluid my-links">
   <h3>My Links</h3>
-    <% if @links.any? %>
+    <% if @links.present? %>
     <div class="panel-group" id="accordion" role="tablist" 
       aria-multiselectable="true">
       <% @links.each do |link| %>

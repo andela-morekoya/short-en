@@ -28,7 +28,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(new_link_params)
+    @link = Link.new(link_params)
     @link.user_id = if current_user
                       current_user.id
                     else
@@ -47,12 +47,6 @@ class LinksController < ApplicationController
       end
       format.js
     end
-
-    # if @link.save
-    #   redirect_to root_path, notice: "Link was successfully created"
-    # else
-    #   redirect_to root_path, alert: "Please enter a valid URL (with http)"
-    # end
   end
 
   def update
@@ -66,12 +60,6 @@ class LinksController < ApplicationController
         format.js
       end
     end
-
-    # if @link.update(link_params)
-    #   redirect_to :dashboard, notice: "Link updated successfully"
-    # else
-    #   redirect_to :dashboard, alert: "Error occured"
-    # end
   end
 
   def destroy
@@ -81,8 +69,6 @@ class LinksController < ApplicationController
         redirect_to :dashboard, notice: "Link deleted successfully"
       end
     end
-
-    # redirect_to :dashboard, notice: "Link deleted successfully"
   end
 
   private
@@ -92,13 +78,7 @@ class LinksController < ApplicationController
   end
 
   def my_links
-    if current_user
-      @links = Link.where(user_id: current_user.id).order(created_at: :desc)
-    end
-  end
-
-  def new_link_params
-    params.require(:link).permit(:original, :slug)
+    @links = Link.get_my_links(current_user)
   end
 
   def link_params

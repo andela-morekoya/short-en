@@ -1,10 +1,11 @@
 def shorten_link(url, vanity = "")
-  unless vanity.empty?
+  if vanity.present?
     find(".dropdown-toggle").click
-    find("#link_slug").set vanity
+    fill_in "link[slug]", with: vanity
   end
-  find("#link_original").set url
-  find(".btn-shorten").click
+
+  fill_in "link[original]", with: url
+  page.execute_script %($("#new_link").submit())
 end
 
 def login(email, password)

@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
 
   has_many :links
   has_many :visits
+
+  def self.get_user(email)
+    User.where(email: email).first
+  end
 end

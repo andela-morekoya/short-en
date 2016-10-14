@@ -24,8 +24,6 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "faker"
   gem "coveralls", require: false
-  gem "selenium-webdriver"
-  gem "chromedriver-helper"
 end
 
 group :development do

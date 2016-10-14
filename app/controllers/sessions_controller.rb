@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where(email: params[:session][:email]).first
+    user = User.get_user(params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       redirect_to dashboard_path, notice: "Signed in successfully!"

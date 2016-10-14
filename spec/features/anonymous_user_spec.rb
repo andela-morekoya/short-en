@@ -8,7 +8,7 @@ RSpec.feature "Anonymous user visits site", type: :feature, js: true do
   scenario "they can shorten a url" do
     shorten_link(Faker::Internet.url)
 
-    expect(page).to have_content "Your Shortened Link"
+    expect(page).to have_content "your shortened link"
   end
 
   scenario "they see a list of popular urls" do

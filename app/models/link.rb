@@ -19,6 +19,12 @@ class Link < ActiveRecord::Base
     visits.count
   end
 
+  def self.get_my_links(user)
+    if user
+      Link.where(user_id: user.id).order(created_at: :desc)
+    end
+  end
+
   protected
 
   def set_slug
