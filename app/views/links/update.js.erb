@@ -1,4 +1,9 @@
+$('.my-links').html("<%= j(render 'links/my_links').html_safe %>");
 
-$('#update-error').html('<% if @link.errors.any? %>'
-  + '<ul><% @link.errors.full_messages.each do |msg| %>'
-  + '<li><%= msg %></li><% end %></ul><% end %>');
+<% if @link.errors.any? %>
+  $('#update-error').html(''
+    + '<h4><%= pluralize(@link.errors.count, "error") %>'
+    + ' stopped this link from being created:</h4>'
+    + '<ul><% @link.errors.full_messages.each do |msg| %>'
+    + '<li><%= msg.gsub("Original", "URL") %></li><% end %></ul>');
+<% end %>

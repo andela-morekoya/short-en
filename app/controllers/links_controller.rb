@@ -1,7 +1,7 @@
 class LinksController < ApplicationController
   before_action :authenticate, except: [:show, :new, :create]
   before_action :set_link, only: [:edit, :update, :destroy]
-  before_action :my_links, only: [:dashboard, :create]
+  before_action :my_links, only: [:dashboard, :create, :update]
 
   def show
     @link = Link.find_by(slug: params[:slug])
@@ -29,11 +29,7 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(link_params)
-    @link.user_id = if current_user
-                      current_user.id
-                    else
-                      0
-                    end
+    @link.user_id = set_user_id
 
     respond_to do |format|
       if @link.save
@@ -57,8 +53,8 @@ class LinksController < ApplicationController
         end
       else
         format.html { redirect_to :dashboard, alert: "Error occured" }
-        format.js
       end
+      format.js
     end
   end
 
@@ -83,5 +79,13 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:original, :slug, :active)
+  end
+
+  def set_user_id
+    if current_user
+      current_user.id
+    else
+      0
+    end
   end
 end

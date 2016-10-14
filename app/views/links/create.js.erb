@@ -1,6 +1,6 @@
 $('.url').val('');
 
-<% unless @link.slug.nil? %>
+<% if @link.slug.present? %>
   new Clipboard('.btn-copy');
   $('.result').html('<br><p>Your Shortened Link: ' 
     + '<span id="short_url">'
