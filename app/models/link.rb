@@ -28,7 +28,7 @@ class Link < ActiveRecord::Base
   protected
 
   def set_slug
-    self.slug = (self.slug.parameterize if slug) || convert_original_url
+    self.slug = (slug.parameterize if slug) || convert_original_url
   end
 
   def convert_original_url

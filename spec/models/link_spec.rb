@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Link, type: :model do
-
   let(:link) { Link.create(original: Faker::Internet.url, user_id: "1") }
 
   describe "associations" do
