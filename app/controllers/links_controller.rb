@@ -52,7 +52,9 @@ class LinksController < ApplicationController
           flash[:notice] = "Link updated successfully"
         end
       else
-        flash[:alert] = "Error occured"
+        format.js do
+          flash[:alert] = "Error occured"
+        end
       end
     end
   end

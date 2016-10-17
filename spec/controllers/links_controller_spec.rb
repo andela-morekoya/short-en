@@ -21,9 +21,18 @@ RSpec.describe LinksController, type: :controller do
       end
     end
 
-    context "when slug is invalid or inactive" do
+    context "when slug is inactive" do
       it "redirects user to original url" do
-        get :show, slug: "invalid"
+        link.update(slug: "inactive", active: false)
+        get :show, slug: "inactive"
+
+        expect(response).to render_template "layouts/error"
+      end
+    end
+
+    context "when slug has been deleted" do
+      it "redirects user to original url" do
+        get :show, slug: "deleted"
 
         expect(response).to render_template "layouts/error"
       end
@@ -107,7 +116,7 @@ RSpec.describe LinksController, type: :controller do
       end
     end
 
-    context "when user is registered" do
+    context "when user is registered and valid params used" do
       it "updates the link" do
         session[:user_id] = user.id
 
@@ -116,6 +125,17 @@ RSpec.describe LinksController, type: :controller do
 
         expect(flash[:notice]).to eq "Link updated successfully"
         expect(link.slug).to eq "updated"
+      end
+    end
+
+    context "when user is registered and invalid params used" do
+      it "raises an error" do
+        session[:user_id] = user.id
+
+        patch :update, id: link.id, link: { original: "bad.com" }, format: "js"
+        link.reload
+
+        expect(flash[:alert]).to eq "Error occured"
       end
     end
   end
