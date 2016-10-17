@@ -1,11 +1,10 @@
 require "coveralls"
-require "codeclimate-test-reporter"
 require "capybara/rspec"
 require "support/helpers"
 require "support/database_cleaner"
+require "support/wait_for_ajax"
 
 Coveralls.wear!("rails")
-CodeClimate::TestReporter.start
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

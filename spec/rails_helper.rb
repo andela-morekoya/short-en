@@ -5,7 +5,6 @@ if Rails.env.production?
 end
 require "spec_helper"
 require "rspec/rails"
-require "support/wait_for_ajax"
 
 ActiveRecord::Migration.maintain_test_schema!
 

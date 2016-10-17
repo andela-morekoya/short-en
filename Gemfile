@@ -12,7 +12,6 @@ gem "jbuilder", "~> 2.0"
 gem "bcrypt", "~> 3.1.7"
 gem "puma", "~> 3.6"
 gem "json"
-gem "coveralls", require: false
 gem "nokogiri"
 
 group :development, :test do
@@ -33,7 +32,6 @@ end
 
 group :test do
   gem "shoulda-matchers"
-  gem "codeclimate-test-reporter", require: nil
   gem "database_cleaner"
 end
 
