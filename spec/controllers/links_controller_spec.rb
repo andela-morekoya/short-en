@@ -17,6 +17,7 @@ RSpec.describe LinksController, type: :controller do
         get :show, slug: link.slug
 
         expect(response).to redirect_to(link.original)
+        expect(Visit.count).to eq 1
       end
     end
 

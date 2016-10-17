@@ -80,6 +80,10 @@ body{
     color: #a94442;
 }
 
+a:focus{
+  color: $navy;  
+}
+
 .badge{
   color: $black;
   background-color: $yellow;

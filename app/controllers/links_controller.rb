@@ -49,10 +49,10 @@ class LinksController < ApplicationController
     respond_to do |format|
       if @link.update(link_params)
         format.js do
-          flash[:notice]= "Link updated successfully"
+          flash[:notice] = "Link updated successfully"
         end
       else
-          flash[:alert]= "Error occured"
+        flash[:alert] = "Error occured"
       end
     end
   end

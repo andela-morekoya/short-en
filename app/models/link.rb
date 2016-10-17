@@ -45,7 +45,7 @@ class Link < ActiveRecord::Base
   def get_title
     page = Net::HTTP.get(URI(original))
     Nokogiri::HTML::Document.parse(page).title.squish
-  rescue SocketError, OpenTimeout, NoMethodError, ECONNRESET
+  rescue SocketError, Net::OpenTimeout, NoMethodError, Errno::ECONNRESET
     original
   end
 end
