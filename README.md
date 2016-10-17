@@ -6,18 +6,25 @@
 #SHORT-EN
 ##Introduction
 
->A URL shortening app built using Ruby on Rails
+A URL shortening app built using Ruby on Rails
 
->Thinking about that long and unwieldy website link? What do you do?
+Thinking about that long and unwieldy website link? What do you do?
 
->Try out [**Short-en**](https://ashort-en.herokuapp.com/). It will help reduce the length of the link and make it more preesentable
+Try out [**Short-en**](https://ashort-en.herokuapp.com/). It will help reduce the length of the link and make it more preesentable
 
 <hr>
 
 ##Table of Contents
+* [Getting Started](#getting-started)
 * [Features](#features)
+* [Dependencies](#dependencies)
 * [Limitations](#limitations)
 * [Testing](#testing)
+
+
+##Getting Started
+Visit [**Short-en**](https://ashort-en.herokuapp.com/). Enter your url in the form on the homepage and click "Shorten" to get your shortened url.
+To get the extra features as listed [here](#registered), become a registered user by clicking "Create an Account"
 
 
 ##Features
@@ -31,12 +38,12 @@ When you make use of [**Short-en**](https://ashort-en.herokuapp.com/) as an unre
 
 * View the most influential users
 
-You get even more when you become a registered user. In addition to the above features, you will also get
+You get even more when you become a <a name="registered"></a>registered user. In addition to the above features, you will also get
 
- * Use of Vanity Strings - Set what you want your shortened url to be
+ * Use of Vanity Strings - Choose your shortened url by setting a vanity string
 
  * Edit your links - Change the target of the shortened url or delete them
- 
+
  * Disable your shortened url so it is no longer acessible. Enable when you like
 
  * Easy access to all your links
@@ -44,76 +51,30 @@ You get even more when you become a registered user. In addition to the above fe
  * Details on person that has used your link
 
 
+##Dependencies
+The external dependencies of this project include
+ * Bootstrap
+ * Bootstrap Switch
+ * jQuery
+ * clipboard.js
+
+
  ##Limitations
  * Vanity string cannot be phrases - spaces in phrases are replaced with underscores
- * Developers cannot interact with the application on the backend
+ * URLs must begin with http:// or https://
+ * There is no check for duplicated URLs
+ * There is no API
 
 
 ## Testing
-RSpec was used for testing on this project. The documention is as follows
-
-####Feature Tests
-**Anonymous User Features**
-User visits site
-- lists URLs sorted by popularity
-- lists URLs sorted by how recently they were added
-- lists influential users
-- enters valid url
- - returns a service shortened URL
-- enters an invalid Url
- - gives an invalid url error
-
-**Registered User Features**
-User visits site
-- enters valid url with vanity string
- - returns a service shortened URL with specified vanity
-- visit user page
- - lists of all user's service shortened URLs
- - gives links to each url detail page
-- view a shortened URL details page
- - gives details about each individual who has used the URL
-
-####Model Tests
-**Link**
-- is valid with a full original url and a user ID
-- is invalid without a valid original url
-- is invalid without a user ID
-- generates a short url when given a full url
-- returns the slug as a url
-
-**User**
-- should validate that :username cannot be empty/falsy
-- should validate that :username is case-insensitively unique
-- should validate that :email cannot be empty/falsy
-- should validate that :email is case-insensitively unique
-- should allow :email to be ‹"email@valid.com"›
-- should not allow :email to be ‹"email@invalid"›
-- should have a secure password
-- should validate that the length of :password is at least 6
-- should have many links
-
-**Visit**
-- should belong to user
-- should belong to link
-
-####Controller Tests
-**LinksController**
-- before actions
- - should have :authenticate as a before_action
-- should have :set_link as a before_action
-- should have :my_links as a before_action
-- GET "#show"
- - redirects slug to original url
-- POST "#create"
- - with invalid params
-   - should raise error
-
-**UsersController**
-- GET #new
- - shows the create account page
-- POST #create
- - creates valid user
-
-**WelcomeController**
- - GET #index
-  - displays welcome page
+RSpec with capybara was used for testing on this project. To run the tests,
+ * Clone this repo
+   `git clone https://github.com/andela-morekoya/short-en.git`
+ * Navigate into the project folder
+   `cd short-en`
+ * Install the project's gems
+   `bundle install`
+ * Setup the databases
+   `rake db:setup`
+ * Run rspec
+   `bundle exec rspec`
