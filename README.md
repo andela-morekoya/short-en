@@ -59,13 +59,6 @@ The external dependencies of this project include
  * clipboard.js
 
 
- ##Limitations
- * Vanity string cannot be phrases - spaces in phrases are replaced with underscores
- * URLs must begin with http:// or https://
- * There is no check for duplicated URLs
- * There is no API
-
-
 ## Testing
 RSpec with capybara was used for testing on this project. To run the tests,
  * Clone this repo
@@ -78,3 +71,10 @@ RSpec with capybara was used for testing on this project. To run the tests,
    `rake db:setup`
  * Run rspec
    `bundle exec rspec`
+
+
+##Limitations
+ * Vanity string cannot be phrases - spaces in phrases are replaced with underscores
+ * URLs must begin with http:// or https://
+ * There is no check for duplicated URLs
+ * There is no API
