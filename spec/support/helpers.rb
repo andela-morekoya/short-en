@@ -6,6 +6,7 @@ def shorten_link(url, vanity = "")
 
   fill_in "link[original]", with: url
   page.execute_script %($("#new_link").submit())
+  wait_for_ajax
 end
 
 def login(email, password)

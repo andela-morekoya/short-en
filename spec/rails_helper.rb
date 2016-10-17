@@ -5,6 +5,7 @@ if Rails.env.production?
 end
 require "spec_helper"
 require "rspec/rails"
+require "support/wait_for_ajax"
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -13,6 +14,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.include WaitForAjax, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|

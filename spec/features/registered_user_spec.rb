@@ -13,7 +13,6 @@ RSpec.feature "Registered user logs in", type: :feature, js: true do
 
     shorten_link(Faker::Internet.url, vanity)
 
-    expect(page).to have_content "Link was successfully created"
     expect(Link.last.slug).to eq(vanity)
   end
 
@@ -29,10 +28,9 @@ RSpec.feature "Registered user logs in", type: :feature, js: true do
 
   scenario "they can deactivate a link" do
     click_link "Edit"
-    uncheck "link_active"
-    click_button "Update Link"
-    click_link "Edit"
-
-    expect(find("#link_active")).to_not be_checked
+    page.execute_script %($("link_active").checked = false)
+    find_button("Update Link").click
+    status = page.has_checked_field?("#link_active")
+    expect(status).to be_falsey
   end
 end

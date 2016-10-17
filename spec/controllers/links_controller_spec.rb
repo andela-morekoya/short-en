@@ -110,7 +110,7 @@ RSpec.describe LinksController, type: :controller do
       it "updates the link" do
         session[:user_id] = user.id
 
-        patch :update, id: link.id, link: { slug: "updated" }
+        patch :update, id: link.id, link: { slug: "updated" }, format: "js"
         link.reload
 
         expect(flash[:notice]).to eq "Link updated successfully"

@@ -48,13 +48,12 @@ class LinksController < ApplicationController
   def update
     respond_to do |format|
       if @link.update(link_params)
-        format.html do
-          redirect_to :dashboard, notice: "Link updated successfully"
+        format.js do
+          flash[:notice]= "Link updated successfully"
         end
       else
-        format.html { redirect_to :dashboard, alert: "Error occured" }
+          flash[:alert]= "Error occured"
       end
-      format.js
     end
   end
 

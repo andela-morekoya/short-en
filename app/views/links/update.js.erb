@@ -1,4 +1,12 @@
+$('.alert').html('<%= notice %>').show();
+
 $('.my-links').html("<%= j(render 'links/my_links').html_safe %>");
+
+$('.checkbox-lg').bootstrapSwitch();
+
+var id = '<%= "#collapse-edit#{@link.id}" %>';
+
+$(id).addClass('in');
 
 <% if @link.errors.any? %>
   $('#update-error').html(''
