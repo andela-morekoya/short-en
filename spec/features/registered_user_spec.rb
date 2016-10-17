@@ -33,4 +33,10 @@ RSpec.feature "Registered user logs in", type: :feature, js: true do
     status = page.has_checked_field?("#link_active")
     expect(status).to be_falsey
   end
+
+  scenario "they can log out" do
+    click_link "Log Out"
+
+    expect(current_path).to eq root_path
+  end
 end

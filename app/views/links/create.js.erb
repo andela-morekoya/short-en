@@ -1,4 +1,5 @@
 $('.url').val('');
+$('.alert').html('<%= notice %>').show();
 
 <% if @link.slug.present? %>
   new Clipboard('.btn-copy');
@@ -22,4 +23,6 @@ $('.url').val('');
     + ' stopped this link from being created:</h4>'
     + '<ul><% @link.errors.full_messages.each do |msg| %>'
     + '<li><%= msg.gsub("Original", "URL") %></li><% end %></ul>');
+<% else %>
+  $('#update-error').html('');
 <% end %>

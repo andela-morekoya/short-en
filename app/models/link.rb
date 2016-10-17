@@ -1,12 +1,14 @@
 class Link < ActiveRecord::Base
   belongs_to :user
   has_many :visits
+
   validates :user_id, :original, presence: true
   validates :original, format: {
     with: URI.regexp,
     notice: "Please enter a valid URL"
   }
   validates :slug, uniqueness: true
+
   before_save :set_slug, :set_title
 
   scope :recent, -> { order(created_at: :desc) }
@@ -20,17 +22,13 @@ class Link < ActiveRecord::Base
   end
 
   def self.get_my_links(user)
-    if user
-      Link.where(user_id: user.id).order(created_at: :desc)
-    end
+    where(user_id: user.id).order(created_at: :desc) if user
   end
 
   protected
 
   def set_slug
-    self.slug = slug.parameterize if slug
-
-    self.slug = convert_original_url if slug.nil? || slug.empty?
+    self.slug = (self.slug.parameterize if slug) || convert_original_url
   end
 
   def convert_original_url

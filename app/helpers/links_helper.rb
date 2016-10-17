@@ -1,9 +1,5 @@
 module LinksHelper
   def visitor_name(visit)
-    if visit.user
-      visit.user.username
-    else
-      "Anonymous"
-    end
+    (visit.user.username if visit.user) || "Anonymous"
   end
 end

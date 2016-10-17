@@ -1,14 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Link, type: :model do
+
+  let(:link) { Link.create(original: Faker::Internet.url, user_id: "1") }
+
   describe "associations" do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:visits) }
   end
 
   it "is valid with a full original url and a user ID" do
-    link = Link.new(original: Faker::Internet.url, user_id: "1")
-
     expect(link).to be_valid
   end
 
@@ -29,13 +30,10 @@ RSpec.describe Link, type: :model do
   end
 
   it "generates a short url when given a full url" do
-    link = Link.create(original: Faker::Internet.url, user_id: "1")
-
     expect(link.slug).to_not be_empty
   end
 
   it "returns the slug as a url" do
-    link = Link.create(original: Faker::Internet.url, user_id: "1")
     expect(link.shortened_url).to include("http")
   end
 end

@@ -1,6 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/andela-morekoya/short-en/badges/gpa.svg)](https://codeclimate.com/github/andela-morekoya/short-en)
 [![Build Status](https://travis-ci.org/andela-morekoya/short-en.svg?branch=develop)](https://travis-ci.org/andela-morekoya/short-en)
-[![Coverage Status](https://coveralls.io/repos/github/andela-morekoya/short-en/badge.svg?branch=master)](https://coveralls.io/github/andela-morekoya/short-en?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/andela-morekoya/short-en/badge.svg?branch=develop)](https://coveralls.io/github/andela-morekoya/short-en?branch=develop)
 
 
 #SHORT-EN

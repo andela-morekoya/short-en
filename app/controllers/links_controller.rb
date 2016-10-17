@@ -8,7 +8,7 @@ class LinksController < ApplicationController
 
     if @link && @link.active
       Visit.save_visit(@link, current_user, request.remote_ip)
-      redirect_to @link.original, external: true
+      redirect_to @link.original
     elsif @link && !@link.active
       render "layouts/error", locals: { reason: "inactive" }
     else
@@ -29,7 +29,7 @@ class LinksController < ApplicationController
 
   def create
     @link = Link.new(link_params)
-    @link.user_id = set_user_id
+    @link.user_id = (current_user.id if current_user) || 0
 
     respond_to do |format|
       if @link.save
@@ -58,6 +58,7 @@ class LinksController < ApplicationController
   end
 
   def destroy
+    Visit.delete(@link)
     @link.destroy
     respond_to do |format|
       format.html do
@@ -78,13 +79,5 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:original, :slug, :active)
-  end
-
-  def set_user_id
-    if current_user
-      current_user.id
-    else
-      0
-    end
   end
 end

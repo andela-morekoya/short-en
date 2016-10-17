@@ -3,11 +3,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  def no_route_found
-    flash[:notice] = :invalid_address
-    render "not_found"
-  end
-
   protected
 
   def current_user
