@@ -18,8 +18,8 @@ Try out [**Short-en**](https://ashort-en.herokuapp.com/). It will help reduce th
 * [Getting Started](#getting-started)
 * [Features](#features)
 * [Dependencies](#dependencies)
-* [Limitations](#limitations)
 * [Testing](#testing)
+* [Limitations](#limitations)
 
 
 ##Getting Started
