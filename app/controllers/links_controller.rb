@@ -1,21 +1,25 @@
 class LinksController < ApplicationController
+  include Messages
+
+  before_action :authenticate, except: [:show, :new, :create]
   before_action :set_link, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:manage, :index, :update, :destroy,
-    notice: "You must be logged in to view this page"]
-  layout "dashboard", only: :manage
+  before_action :my_links, only: [:dashboard, :create, :update]
 
   def show
-    if params[:slug]
-      @link = Link.find_by(slug: params[:slug])
-      if @link && @link.active
-        @link.visits += 1 if redirect_to @link.original, status: 301
-        @link.save
-      else
-        render "layouts/not_found"
-      end
+    @link = Link.find_by(slug: params[:slug])
+
+    if @link && @link.active
+      Visit.save_visit(@link, current_user, request.remote_ip)
+      redirect_to @link.original
+    elsif @link && !@link.active
+      render "layouts/error", locals: { reason: "inactive" }
     else
-      @link = Link.find_by(id: params[:id])
+      render "layouts/error", locals: { reason: "deleted" }
     end
+  end
+
+  def dashboard
+    @link = Link.new
   end
 
   def new
@@ -23,62 +27,55 @@ class LinksController < ApplicationController
   end
 
   def edit
-    render "index"
   end
 
   def create
-    @link = Link.new(new_link_params)
-    @link.user_id = current_user ? current_user.id : 0
+    @link = Link.new(link_params)
+    @link.user_id = (current_user.id if current_user) || 0
+
+    if @link.save
+      success("Link", "created")
+    else
+      error("Link", "created")
+    end
 
     respond_to do |format|
-      if @link.save
-        format.html { redirect_to root_path, notice: 'Link was successfully created.' }
-        format.js 
-      else
-        format.html { render :form, notice: "Please paste the full URL (with http)" }
-        format.js
-        # format.json { render json: @link.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to root_path }
+      format.js
     end
   end
 
   def update
+    if @link.update(link_params)
+      success("Link", "updated")
+    else
+      error("Link", "updated")
+    end
+    respond_to :js
+  end
+
+  def destroy
+    Visit.delete(@link)
+    @link.destroy
     respond_to do |format|
-      if @link.update(link_params)
-        format.html { redirect_to :dashboard, notice: 'Link updated successfully.' }
-      else
-        format.html { redirect_to :dashboard, notice: 'Error occured' }
-        format.js
-        format.json { render json: @link.errors, status: :unprocessable_entity }
+      format.html do
+        redirect_to :dashboard
+        success("Link", "deleted")
       end
     end
   end
 
-  def manage
-    @link = Link.new
-    @links = Link.where(user_id: current_user.id).order(created_at: :desc)
-    render "index"
-  end
-    
-  def destroy
-    @link.destroy
-    respond_to do |format|
-      format.html { redirect_to :dashboard, notice: 'Link deleted successfully.' }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    def set_link
-      @link = Link.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def new_link_params
-      params.require(:link).permit(:original)
-    end
+  def set_link
+    @link = Link.find(params[:id])
+  end
 
-    def link_params
-      params.require(:link).permit(:original, :slug, :active)
-    end
+  def my_links
+    @links = Link.get_my_links(current_user)
+  end
+
+  def link_params
+    params.require(:link).permit(:original, :slug, :active)
+  end
 end

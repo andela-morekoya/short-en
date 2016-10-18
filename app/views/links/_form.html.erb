@@ -1,11 +1,24 @@
 <%= form_for @link, remote: true do |f| %>
   <div class="input-group">
-    <%= f.text_field :original, :class => "form-control input-lg url",
-        :placeholder => "Paste your link, shorten it and share" %>
+  <% if current_user %>
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-lg dropdown-toggle" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Vanity String<span class="caret"></span>
+        </button>
+        <div class="dropdown-menu vanity">
+          <%= f.text_field :slug, class: "form-control input-lg",
+              placeholder: "Enter your vanity string (optional)" %>
+        </div>
+      </div>
+    <% end %>
+    <%= f.text_field :original, class: "form-control input-lg url",
+        placeholder: "Paste your link, shorten it and share" %>
     <span class="input-group-btn">
-      <%= f.submit 'Shorten', :class => "btn btn-lg"%>
+      <%= f.submit 'Shorten', class: "btn btn-lg btn-shorten"%>
     </span>
   </div>
-<div id="error-explanation"></div>
 <% end %>
-<div class="result center"></div>
+
+<div class="result text-center"></div>
+<div id="error-explanation"></div>

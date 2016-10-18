@@ -1,9 +1,32 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "colors"; 
+@import "colors";
+@import "box_sizing";
+
 
 body{
   color: $black;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.main{
+  min-height: 60vh;
+}
+
+#wrapper{
+  min-height: 100%;
+  position: relative;
+}
+
+#header{
+  padding: 0;
+}
+
+#content{
+  padding: 0;
+  padding-bottom: 5em;   
 }
 
 .navbar{
@@ -25,11 +48,13 @@ body{
 
 .navbar-header a:hover, a:focus{
   text-decoration: none;
+  color:white;
 }
 
 .navbar-inverse .navbar-nav > li > a{
   color: white;
   margin-top: 10px;
+  padding-bottom: 20px;
 }
 
 .jumbotron{
@@ -58,9 +83,14 @@ body{
     color: #a94442;
 }
 
+a:focus{
+  color: $navy;  
+}
+
 .badge{
   color: $black;
   background-color: $yellow;
+  padding: 5px 10px;
 }
 
 .list-group-item{
@@ -75,6 +105,27 @@ body{
 .panel-heading{
   color: white;
   background-color: $black;
+}
+
+input, select, .uneditable-input{
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input{
+  height: auto;
+}
+
+.btn-signup{
+  background-color: $yellow;
+  color: $navy;
+}
+
+.dropdown-menu.vanity{
+  margin: 0;
+  padding: 0;
+  min-width: 30em;
 }
 
 footer{

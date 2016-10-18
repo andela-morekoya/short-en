@@ -1,15 +1,22 @@
-require 'rails_helper'
+require "rails_helper"
 
-# Specs in this file have access to a helper object that includes
-# the LinksHelper. For example:
-#
-# describe LinksHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe LinksHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#visitor_name" do
+    context "when a registered user visits the link" do
+      it "displays the user's username" do
+        user = FactoryGirl.create(:user)
+        visit = Visit.create(user_id: user.id, link_id: 1)
+
+        expect(visitor_name(visit)).to eq user.username
+      end
+    end
+
+    context "when anonymous user visits the link" do
+      it "dispays the username as 'Anonymous'" do
+        visit = Visit.create(user_id: 0, link_id: 1)
+
+        expect(visitor_name(visit)).to eq "Anonymous"
+      end
+    end
+  end
 end

@@ -1,16 +1,34 @@
 [![Code Climate](https://codeclimate.com/github/andela-morekoya/short-en/badges/gpa.svg)](https://codeclimate.com/github/andela-morekoya/short-en)
-[![Coverage Status](https://coveralls.io/repos/github/andela-morekoya/short-en/badge.svg?branch=master)](https://coveralls.io/github/andela-morekoya/short-en?branch=master)
+[![Build Status](https://travis-ci.org/andela-morekoya/short-en.svg?branch=develop)](https://travis-ci.org/andela-morekoya/short-en)
+[![Coverage Status](https://coveralls.io/repos/github/andela-morekoya/short-en/badge.svg?branch=develop)](https://coveralls.io/github/andela-morekoya/short-en?branch=develop)
+
 
 #SHORT-EN
+##Introduction
 
 A URL shortening app built using Ruby on Rails
 
-When you have to send a website link that is long and unwieldy, what do you do?
+Thinking about that long and unwieldy website link? What do you do?
 
-Try out Short-en. It will help reduce the length of the link and make it more preesentable
+Try out [**Short-en**](https://ashort-en.herokuapp.com/). It will help reduce the length of the link and make it more preesentable
+
+<hr>
+
+##Table of Contents
+* [Getting Started](#getting-started)
+* [Features](#features)
+* [Dependencies](#dependencies)
+* [Testing](#testing)
+* [Limitations](#limitations)
+
+
+##Getting Started
+Visit [**Short-en**](https://ashort-en.herokuapp.com/). Enter your url in the form on the homepage and click "Shorten" to get your shortened url.
+To get the extra features as listed [here](#registered), become a registered user by clicking "Create an Account"
+
 
 ##Features
-As a user who is not signed in to the app, you are able to
+When you make use of [**Short-en**](https://ashort-en.herokuapp.com/) as an unregistered user who is not signed in to the web application, you are able to
 
 * Shorten links - Links need to include the "http(s)://" part
 
@@ -20,31 +38,43 @@ As a user who is not signed in to the app, you are able to
 
 * View the most influential users
 
-When you sign up for the the Short-en service, in addition to the above features, you will also get
+You get even more when you become a <a name="registered"></a>registered user. In addition to the above features, you will also get
 
- * Use of Vanity Strings - Set what you want your shortened url to be
+ * Use of Vanity Strings - Choose your shortened url by setting a vanity string
 
- * Edit your links - Change the target of the shortened link
+ * Edit your links - Change the target of the shortened url or delete them
 
- * Easy access to all you links
+ * Disable your shortened url so it is no longer acessible. Enable when you like
 
- ## Go to https://ashort-en.herokuapp.com/ to start using Short-en
+ * Easy access to all your links
 
-The app does not provide statistics currently. This feature is under implementation
+ * Details on person that has used your link
 
-# Running the app locally
 
-Make sure you are using ruby 2.3.1
+##Dependencies
+The external dependencies of this project include
+ * Bootstrap
+ * Bootstrap Switch
+ * jQuery
+ * clipboard.js
 
-* Clone this app: ```git clone https://github.com/andela-morekoya/short-en.git```
-
-* Install the required gems and dependencies ```bundle install```
-
-* Setup the database ```rake db:setup```
-
-* Start your server and navigate to the specified port on your localhost ```rails s```
 
 ## Testing
-RSpec was used for testing on this project.
+RSpec with capybara was used for testing on this project. To run the tests,
+ * Clone this repo
+   `git clone https://github.com/andela-morekoya/short-en.git`
+ * Navigate into the project folder
+   `cd short-en`
+ * Install the project's gems
+   `bundle install`
+ * Setup the databases
+   `rake db:setup`
+ * Run rspec
+   `bundle exec rspec`
 
 
+##Limitations
+ * Vanity string cannot be phrases - spaces in phrases are replaced with underscores
+ * URLs must begin with http:// or https://
+ * There is no check for duplicated URLs
+ * There is no API

@@ -1,8 +1,18 @@
-<div class="container-fluid">
-<h1>Editing Link</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @link %> |
-<%= link_to 'Back', links_path %>
-</div>
+<%= form_for link, remote: true do |f| %>
+  Original URL : 
+  <%= f.url_field :original, required: true, class: "form-control" %>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <label>Set Vanity String Slug: </label> 
+      <%= f.text_field :slug, required: true%>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <label>Status: </label>
+      <%= f.check_box :active, class: "checkbox-lg" %>
+    </div>
+    <div class="col-sm-6 col-md-2">
+      <%= f.submit "Update Link", class: "btn btn-primary" %>
+    </div>
+  </div>
+  <div id="update-error"></div>
+<% end %>

@@ -1,35 +1,51 @@
 class Link < ActiveRecord::Base
   belongs_to :user
-  has_many :visit
-  before_create :convert_original_url
+  has_many :visits
+
+  before_validation :set_slug
+
   validates :user_id, :original, presence: true
-  validates :original, format: { with: %r{\A^http|https:\/\/},
-                             notice: 'Your URL should include http/https' }
+  validates :original, format: {
+    with: URI.regexp,
+    notice: "Please enter a valid URL"
+  }
   validates :slug, uniqueness: true
 
+  before_save :set_title
+
+  scope :recent, -> { order(created_at: :desc) }
+
   def shortened_url
-    ENV["BASE_URL"] + self.slug
+    ENV["BASE_URL"] + slug
   end
 
-  def get_title
-    # page = URI.parse(self.original).read
-    # page.match(/<title>(.*)<\/title>/)[1]
-    open('http://google.com/').read.match(/<title>(.*?)<\/title>/)[1]
+  def visit_count
+    visits.count
   end
 
-  def self.popular
-    Link.order(visits: :desc).first(7)
-  end
-
-  def self.recent
-    Link.order(created_at: :desc).first(7)
+  def self.get_my_links(user)
+    where(user_id: user.id).order(created_at: :desc) if user
   end
 
   protected
 
+  def set_slug
+    self.slug = (slug.parameterize if slug.present?) || convert_original_url
+  end
+
   def convert_original_url
     alphabet = ("a".."z").to_a + (0..9).to_a
-    # self.slug = (0...6).map{ alphabet.to_a[rand(alphabet.size)] }.join
-    self.slug = (0...6).map{ alphabet.sample }.join
+    (0...6).map { alphabet.sample }.join
+  end
+
+  def set_title
+    self.title = get_title
+  end
+
+  def get_title
+    page = Net::HTTP.get(URI(original))
+    Nokogiri::HTML::Document.parse(page).title.squish
+  rescue SocketError, Net::OpenTimeout, NoMethodError, Errno::ECONNRESET
+    original
   end
 end

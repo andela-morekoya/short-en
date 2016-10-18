@@ -1,0 +1,48 @@
+<div class="container-fluid my-links">
+  <h3>My Links</h3>
+    <% if @links.present? %>
+    <div class="panel-group" id="accordion" role="tablist" 
+      aria-multiselectable="true">
+      <% @links.each do |link| %>
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="heading<%= link.id %>">
+            <h4 class="panel-title">
+            <div class="row flex-items-xs-middle">
+              <div class="col-sm-12 col-md-9">
+                <%= link_to link.title, link.shortened_url, target: "_blank" %> 
+                <%= " - #{link.shortened_url}" %>
+              </div>
+              <a class= "collapsed col-sm-4 col-md-1 "role="button" 
+                data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse-detail<%= link.id %>" aria-expanded="true" 
+                aria-controls="collapse-detail<%= link.id %>">Details</a>
+              <a class= "collapsed col-sm-4 col-md-1 "role="button" 
+                data-toggle="collapse" data-parent="#accordion" 
+                href="#collapse-edit<%= link.id %>" aria-expanded="true" 
+                aria-controls="collapse-edit<%= link.id %>">Edit</a>
+              <div class="delete-link col-sm-4 col-md-1">
+                <%= link_to 'Delete', link, method: :delete, 
+                  data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+            </h4>
+          </div>
+          <div id="collapse-detail<%= link.id %>" class="panel-collapse collapse" 
+            role="tabpanel" aria-labelledby="heading<%= link.id %>">
+            <div class="panel-body">
+              <%= render partial: "links/link_detail", locals: { link: link} %>
+            </div>
+          </div>
+          <div id="collapse-edit<%= link.id %>" class="panel-collapse collapse" 
+          role="tabpanel" aria-labelledby="heading<%= link.id %>">
+            <div class="panel-body">
+              <%= render file: "links/edit", locals: { link: link} %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <% else %>
+      <p> You have not shortened any links </p>
+  <% end %>
+</div>

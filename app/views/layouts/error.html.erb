@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="text-center">
+      <h1>OOPS! <small>
+      <font face="Tahoma" color="red">an error occured</font></small></h1>
+      <br /><% reason ||= "no where to be found" %>
+      <p>The page you requested is <%= reason %>.</p>
+      <p>Please use your browsers <b>Back</b> button to return to the page 
+          you came from.</p>
+      <p><b>Or you could just press this neat little button:</b></p>
+      <%= link_to root_path do %>
+      <button class="btn btn-large btn-info">
+      <i class="icon-home icon-white"></i> Take Me Home</button>
+      <% end %>
+    </div>
+  </div>
+</div>

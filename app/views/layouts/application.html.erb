@@ -3,11 +3,12 @@
 <head>
   <title>Short.en | URL Shortener</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css?family=Permanent+Marker&effect=ice", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "application", "https://fonts.googleapis.com/css?family=Permanent+Marker&effect=ice", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/js/bootstrap-switch.min.js", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+
 </head>
-<body id="top"> 
+<body>
   <%= select_nav %>
   
   <% flash.each do |key, value| %>
@@ -18,9 +19,11 @@
       <%= value %>
     </div> 
   <% end %>
-
-  <%= yield %>
+  <div class="main">
+    <%= yield %>
+  </div>
 
   <%= render "layouts/footer" %>
+
 </body>
 </html>
