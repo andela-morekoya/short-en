@@ -53,7 +53,7 @@ RSpec.describe LinksController, type: :controller do
     end
 
     context "when user is not registered" do
-      it "asks user to login" do
+      it "redirects user to login page" do
         get :dashboard
 
         expect(response).to redirect_to login_path
@@ -71,7 +71,7 @@ RSpec.describe LinksController, type: :controller do
 
   describe "#edit" do
     context "when user is not registered" do
-      it "asks user to login" do
+      it "redirects user to login page" do
         get :edit, id: link.id
 
         expect(response).to redirect_to login_path
@@ -111,7 +111,7 @@ RSpec.describe LinksController, type: :controller do
 
   describe "#update" do
     context "when user is not registered" do
-      it "asks user to login" do
+      it "redirects user to login page" do
         patch :update, id: link.id, link: { slug: "updated" }
         link.reload
 
@@ -145,7 +145,7 @@ RSpec.describe LinksController, type: :controller do
 
   describe "#destroy" do
     context "when user is not registered" do
-      it "asks user to login" do
+      it "redirects user to login page" do
         delete :destroy, id: link.id
 
         expect(response).to redirect_to login_path

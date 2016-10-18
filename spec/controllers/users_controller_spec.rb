@@ -23,7 +23,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context "with invalid params" do
-      it "gives error" do
+      it "reloads the signup page with errors listed" do
         post :create, user: { email: "invalid" }
 
         expect(response).to render_template "new"
