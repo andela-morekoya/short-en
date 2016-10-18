@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
+  include Messages
+
   describe "#new" do
     it "shows the create account page" do
       get :new
@@ -16,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
 
         expect(User.count).to eq 1
         expect(session[:user_id]).to_not be_nil
-        expect(flash[:notice]).to eq "Account created successfully!"
+        expect(flash[:notice]).to eq success("Account", "created")
       end
     end
 

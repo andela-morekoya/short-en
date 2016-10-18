@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe LinksController, type: :controller do
+  include Messages
+
   let(:user) { FactoryGirl.create(:user) }
 
   let(:link) { Link.create(FactoryGirl.attributes_for(:link)) }
@@ -91,17 +93,18 @@ RSpec.describe LinksController, type: :controller do
   describe "#create" do
     context "with invalid params" do
       it "should raise error" do
-        post :create, link: { original: "something" }
+        post :create, link: { original: "something" }, format: "js"
 
-        expect(flash[:alert]).to eq "Please enter a valid URL (with http)"
+        expect(flash[:alert]).to eq error("Link", "created")
       end
     end
 
     context "with valid params" do
       it "should be successful" do
-        post :create, link: { original: "http://abc.com", user_id: 2 }
+        post :create, link: { original: "http://abc.com", user_id: 2 },
+                      format: "js"
 
-        expect(flash[:notice]).to eq "Link was successfully created"
+        expect(flash[:notice]).to eq success("Link", "created")
       end
     end
   end
@@ -123,7 +126,7 @@ RSpec.describe LinksController, type: :controller do
         patch :update, id: link.id, link: { slug: "updated" }, format: "js"
         link.reload
 
-        expect(flash[:notice]).to eq "Link updated successfully"
+        expect(flash[:notice]).to eq success("Link", "updated")
         expect(link.slug).to eq "updated"
       end
     end
@@ -135,7 +138,7 @@ RSpec.describe LinksController, type: :controller do
         patch :update, id: link.id, link: { original: "bad.com" }, format: "js"
         link.reload
 
-        expect(flash[:alert]).to eq "Error occured"
+        expect(flash[:alert]).to eq error("Link", "updated")
       end
     end
   end
@@ -155,7 +158,7 @@ RSpec.describe LinksController, type: :controller do
 
         delete :destroy, id: link.id
 
-        expect(flash[:notice]).to eq "Link deleted successfully"
+        expect(flash[:notice]).to eq success("Link", "deleted")
       end
     end
   end

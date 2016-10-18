@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  include Messages
+
   before_action :authenticate, except: [:show, :new, :create]
   before_action :set_link, only: [:edit, :update, :destroy]
   before_action :my_links, only: [:dashboard, :create, :update]
@@ -31,32 +33,25 @@ class LinksController < ApplicationController
     @link = Link.new(link_params)
     @link.user_id = (current_user.id if current_user) || 0
 
+    if @link.save
+      success("Link", "created")
+    else
+      error("Link", "created")
+    end
+
     respond_to do |format|
-      if @link.save
-        format.html do
-          redirect_to root_path, notice: "Link was successfully created"
-        end
-      else
-        format.html do
-          redirect_to root_path, alert: "Please enter a valid URL (with http)"
-        end
-      end
+      format.html { redirect_to root_path }
       format.js
     end
   end
 
   def update
-    respond_to do |format|
-      if @link.update(link_params)
-        format.js do
-          flash[:notice] = "Link updated successfully"
-        end
-      else
-        format.js do
-          flash[:alert] = "Error occured"
-        end
-      end
+    if @link.update(link_params)
+      success("Link", "updated")
+    else
+      error("Link", "updated")
     end
+    respond_to :js
   end
 
   def destroy
@@ -64,7 +59,8 @@ class LinksController < ApplicationController
     @link.destroy
     respond_to do |format|
       format.html do
-        redirect_to :dashboard, notice: "Link deleted successfully"
+        redirect_to :dashboard
+        success("Link", "deleted")
       end
     end
   end

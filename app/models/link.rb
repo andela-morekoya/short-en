@@ -2,6 +2,8 @@ class Link < ActiveRecord::Base
   belongs_to :user
   has_many :visits
 
+  before_validation :set_slug
+
   validates :user_id, :original, presence: true
   validates :original, format: {
     with: URI.regexp,
@@ -9,7 +11,7 @@ class Link < ActiveRecord::Base
   }
   validates :slug, uniqueness: true
 
-  before_save :set_slug, :set_title
+  before_save :set_title
 
   scope :recent, -> { order(created_at: :desc) }
 
@@ -25,10 +27,14 @@ class Link < ActiveRecord::Base
     where(user_id: user.id).order(created_at: :desc) if user
   end
 
+  def get_slug
+    set_slug
+  end
+
   protected
 
   def set_slug
-    self.slug = (slug.parameterize if slug) || convert_original_url
+    self.slug = (slug.parameterize if slug.present?) || convert_original_url
   end
 
   def convert_original_url

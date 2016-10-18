@@ -6,6 +6,7 @@ module WaitForAjax
   end
 
   def finished_all_ajax_requests?
-    page.evaluate_script("jQuery.active").zero?
+    status = page.evaluate_script("jQuery.active")
+    status.zero? if status
   end
 end
