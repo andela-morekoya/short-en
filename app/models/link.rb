@@ -27,10 +27,6 @@ class Link < ActiveRecord::Base
     where(user_id: user.id).order(created_at: :desc) if user
   end
 
-  def get_slug
-    set_slug
-  end
-
   protected
 
   def set_slug
